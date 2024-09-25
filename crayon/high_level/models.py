@@ -25,6 +25,12 @@ class Siegesocial(models.Model):
 
 class Ressource(models.Model):
     pass
+class QuantiteRessource(Objet):
+    ressource= models.ForeignKey(
+        Ressource,
+        on_delete=models.PROTECT,
+    )
+    quantite=models.IntegerField(default=0)
 
 class Machine(models.Model):
     nom=models.CharField(max_length=100)
@@ -33,6 +39,6 @@ class Machine(models.Model):
 
 class Usine(Local):
     machines = models.ForeignKey(
-        Ville,
+        Machine,
         on_delete=models.PROTECT,
     )

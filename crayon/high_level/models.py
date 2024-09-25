@@ -18,3 +18,4 @@ class Local(models.Model):
 class Siegesocial(models.Model):
  
 class Ressource(models.Model):
+ 

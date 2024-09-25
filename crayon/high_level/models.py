@@ -6,3 +6,5 @@ class Ville(models.Model):
   nom=models.CharField(max_length=100)
   code_postal=models.IntegerField(default=0)
   prix_m2=models.IntegerField(default=0)
+ #siegesocial/models.py
+ class Siegesocial(models.Model):

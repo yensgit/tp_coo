@@ -8,12 +8,12 @@ class Ville(models.Model):
   prix_m2=models.IntegerField(default=0)
  #local/models.py
  class Local(models.Model):
-  nom=models.CharField(max_length=100)
-  surface=models.IntegerField(default=0)
   ville= models.ForeignKey(
    Ville,
    on_delete=models.PROTECT,
   )
+  nom=models.CharField(max_length=100)
+  surface=models.IntegerField(default=0)
  #siegesocial/models.py
  class Siegesocial(models.Model):
  #siegesocial/models.py

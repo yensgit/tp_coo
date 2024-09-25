@@ -25,3 +25,14 @@ class Siegesocial(models.Model):
 
 class Ressource(models.Model):
     pass
+
+class Machine(models.Model):
+    nom=models.CharField(max_length=100)
+    n_serie=models.IntegerField(default=0)
+    prix=models.IntegerField(default=0)
+
+class Usine(Local):
+    machines = models.ForeignKey(
+        Ville,
+        on_delete=models.PROTECT,
+    )

@@ -19,12 +19,13 @@ class Local(models.Model):
     surface = models.IntegerField(default=0)
 
 
-class Siegesocial(models.Model):
+class Siegesocial(Local):
     pass
 
 
 class Ressource(models.Model):
     pass
+
 class QuantiteRessource(Objet):
     ressource= models.ForeignKey(
         Ressource,
@@ -42,3 +43,37 @@ class Usine(Local):
         Machine,
         on_delete=models.PROTECT,
     )
+
+class Etape(models.Model):
+    nom=models.CharField(max_length=100)
+    machine= models.ForeignKey(
+        Machine,
+        on_delete=models.PROTECT,
+    )
+    quantite_ressource=models.ForeignKey(
+        QuantiteRessource,
+        on_delete=models.PROTECT,
+    )
+    duree=models.IntegerField(default=0)
+    etape_suivante=models.ForeignKey(
+        "self",
+        on_delete=models.PROTECT,
+    )
+
+class Produit(Objet):
+    premiere_etape= models.ForeignKey(
+        Etape,
+        on_delete=models.PROTECT,
+    )
+    
+class Stock(models.Model):
+    objet= models.ForeignKey(
+        Objet,
+        on_delete=models.PROTECT,
+    )
+    nombre=models.IntegerField(default=0)
+
+class Objet(models.Model):
+    nom =models.CharField(max_length=100)
+    prix=models.IntegerField(default=0)
+    

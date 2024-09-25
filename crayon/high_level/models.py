@@ -8,3 +8,5 @@ class Ville(models.Model):
   prix_m2=models.IntegerField(default=0)
  #siegesocial/models.py
  class Siegesocial(models.Model):
+ #siegesocial/models.py
+ class Ressource(models.Model):

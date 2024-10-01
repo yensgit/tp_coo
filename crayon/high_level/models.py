@@ -30,7 +30,7 @@ class Objet(models.Model):
 class Siegesocial(Local):
     pass
 
-class Ressource(models.Model):
+class Ressource(Objet):
     pass
 
 class QuantiteRessource(Objet):
@@ -41,6 +41,8 @@ class QuantiteRessource(Objet):
     quantite=models.IntegerField(default=0)
     def __str__(self):
         return f"{self.ressource} {self.quantite}"
+    def costs(self):
+        return self.quantite*self.ressource.prix
 
 class Machine(models.Model):
     nom=models.CharField(max_length=100)
@@ -48,9 +50,13 @@ class Machine(models.Model):
     prix=models.IntegerField(default=0)
     def __str__(self):
         return f"{self.nom} {self.n_serie}"
+    def costs(self):
+        return self.prix
 
 class Usine(Local):
     machines = models.ManyToManyField(Machine)
+    def costs(self):
+        return self.local.surface*self.ville.prix_m2+self.machines.prix
 
 class Etape(models.Model):
     nom=models.CharField(max_length=100)
@@ -86,3 +92,5 @@ class Stock(models.Model):
         Usine,
         on_delete=models.PROTECT,
     )
+    def costs(self):
+        return self.nombre*self.quantite*self.ressource.prix

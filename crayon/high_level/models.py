@@ -33,7 +33,7 @@ class Siegesocial(Local):
 class Ressource(Objet):
     pass
 
-class QuantiteRessource(Objet):
+class QuantiteRessource(models.Model):
     ressource= models.ForeignKey(
         Ressource,
         on_delete=models.PROTECT,

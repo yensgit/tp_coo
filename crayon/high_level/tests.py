@@ -2,7 +2,7 @@
 
 from django.test import TestCase
 
-from .models import Machine Usine Ville Ressource QuantiteRessource Local Objet
+from .models import Machine, Usine, Ville, Ressource, QuantiteRessource, Local, Objet
 
 
 class MachineModelTests(TestCase):

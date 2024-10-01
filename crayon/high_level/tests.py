@@ -13,7 +13,7 @@ class MachineModelTests(TestCase):
                                n_serie=44365)
         self.assertEqual(Machine.objects.count(), 1)
     def test_usine_costs(self): 
-         v=Ville.objects.create(nom="Labège",
+        v=Ville.objects.create(nom="Labège",
                                code_postal=31000,
                                prix_m2=2000)
         u=Usine.objects.create(nom="CHEZ MARIAM",

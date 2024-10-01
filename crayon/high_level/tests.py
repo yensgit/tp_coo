@@ -13,7 +13,10 @@ class MachineModelTests(TestCase):
                                n_serie=44365)
         self.assertEqual(Machine.objects.count(), 1)
     def test_usine_costs(self): 
-        u=Usine.objects.create()
+        u=Usine.objects.create(nom="CHEZ MARIAM",
+                              ville="Labège",
+                              surface=50
+                              )
         m1=Machine.objects.create(nom="m1",
                                prix=1000,
                                n_serie=1)
@@ -25,9 +28,18 @@ class MachineModelTests(TestCase):
         r1=Ressource.objects.create(nom="bois",
                                prix=10,
                                    )
-        u.ressource.add(r1)
-         r1=Ressource.objects.create(nom="mine",
-                               prix=15,
-                                    )
-        u.ressource.add(r2)
-      
+
+        r2=Ressource.objects.create(nom="mine",
+                               prix=15)
+        s1=Stock.objects.create(
+            ressource=r1,
+            quantite=50
+        )
+        s2=Stock.objects.create(
+            ressource=r2,
+            quantite=1000
+        )
+        v=Ville.objects.create(nom="Labège",
+                               code_postal=31000,
+                               prix_m2=2000
+        )

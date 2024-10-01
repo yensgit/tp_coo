@@ -86,8 +86,8 @@ class Produit(Objet):
     )
     
 class Stock(models.Model):
-    objet= models.ForeignKey(
-        Objet,
+    ressource= models.ForeignKey(
+        Ressource,
         on_delete=models.PROTECT,
     )
     nombre=models.IntegerField(default=0)

@@ -51,8 +51,10 @@ class Machine(models.Model):
     def __str__(self):
         return f"{self.nom} {self.n_serie}"
     def costs(self):
-        for machine in usine.machine_set.all()
-        return self.prix
+        prix_machines=0
+        for machines in self.machine.all()
+            prix_machines=prix_machines+machines.prix
+        return prix_machines
 
 class Usine(Local):
     machines = models.ManyToManyField(Machine)

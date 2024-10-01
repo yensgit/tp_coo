@@ -17,7 +17,7 @@ class MachineModelTests(TestCase):
                                code_postal=31000,
                                prix_m2=2000)
         u=Usine.objects.create(nom="CHEZ MARIAM",
-                               ville=v.nom,
+                               ville=v,
                                surface=50)
         m1=Machine.objects.create(nom="m1",
                                   prix=1000,

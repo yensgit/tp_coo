@@ -18,10 +18,14 @@ class Local(models.Model):
     )
     nom = models.CharField(max_length=100)
     surface = models.IntegerField(default=0)
+    def __str__(self):
+        return f"{self.nom} {self.ville}"
 
 class Objet(models.Model):
     nom=models.CharField(max_length=100)
     prix=models.IntegerField(default=0)
+    def __str__(self):
+        return self.nom
 
 class Siegesocial(Local):
     pass
@@ -35,11 +39,15 @@ class QuantiteRessource(Objet):
         on_delete=models.PROTECT,
     )
     quantite=models.IntegerField(default=0)
+    def __str__(self):
+        return f"{self.ressource} {self.quantite}"
 
 class Machine(models.Model):
     nom=models.CharField(max_length=100)
     n_serie=models.IntegerField(default=0)
     prix=models.IntegerField(default=0)
+    def __str__(self):
+        return f"{self.nom} {self.n_serie}"
 
 class Usine(Local):
     machines = models.ManyToManyField(Machine)
@@ -59,6 +67,8 @@ class Etape(models.Model):
         "self",
         on_delete=models.PROTECT,
     )
+    def __str__(self):
+        return self.nom
 
 class Produit(Objet):
     premiere_etape= models.ForeignKey(

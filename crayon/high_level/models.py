@@ -59,7 +59,7 @@ class Machine(models.Model):
 class Usine(Local):
     machines = models.ManyToManyField(Machine)
     def costs(self):
-        return self.surface*self.ville.prix_m2+self.machines.prix
+        return self.local.surface*self.ville.prix_m2+self.machines.prix
 
 class Etape(models.Model):
     nom=models.CharField(max_length=100)

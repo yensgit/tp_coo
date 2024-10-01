@@ -23,7 +23,7 @@ class Objet(models.Model):
     nom=models.CharField(max_length=100)
     prix=models.IntegerField(default=0)
 
-class SiegeSocial(Local):
+class Siegesocial(Local):
     pass
 
 class Ressource(models.Model):

@@ -41,10 +41,7 @@ class Machine(models.Model):
     prix=models.IntegerField(default=0)
 
 class Usine(Local):
-    machines = models.ForeignKey(
-        Machine,
-        on_delete=models.PROTECT,
-    )
+    machines = models.ManyToManyField(Machine)
 
 class Etape(models.Model):
     nom=models.CharField(max_length=100)

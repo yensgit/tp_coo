@@ -51,6 +51,7 @@ class Machine(models.Model):
     def __str__(self):
         return f"{self.nom} {self.n_serie}"
     def costs(self):
+        for machine in usine.machine_set.all()
         return self.prix
 
 class Usine(Local):

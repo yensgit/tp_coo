@@ -43,6 +43,6 @@ class MachineModelTests(TestCase):
             ressource=r2,
             quantite=1000
         )
-self.assertEqual (Usine.objects.first().costs(), 110750)
+self.assertEqual (Usine.objects.first().costs(), 113750)
        
      

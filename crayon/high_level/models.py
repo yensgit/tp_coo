@@ -71,4 +71,7 @@ class Stock(models.Model):
         on_delete=models.PROTECT,
     )
     nombre=models.IntegerField(default=0)
-    
+    usine= models.ForeignKey(
+        Usine,
+        on_delete=models.PROTECT,
+    )

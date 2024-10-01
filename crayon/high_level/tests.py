@@ -43,3 +43,4 @@ class MachineModelTests(TestCase):
                                code_postal=31000,
                                prix_m2=2000
         )
+        self.assertEqual(Usine.objects.cout(), 1)

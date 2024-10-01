@@ -52,7 +52,7 @@ class Machine(models.Model):
         return f"{self.nom} {self.n_serie}"
     def costs(self):
         prix_machines=0
-        for machines in self.machine.all()
+        for machines in self.machine.all():
             prix_machines=prix_machines+machines.prix
         return prix_machines
 

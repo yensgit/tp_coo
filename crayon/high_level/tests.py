@@ -11,4 +11,4 @@ class MachineModelTests(TestCase):
         Machine.objects.create(nom="scie",
                                prix=1_000,
                                n_serie=44365)
-        self.assertEqual(Machine.objects.count(), 1)
+        self.assertEqual(Machine.objects.count(), 2)

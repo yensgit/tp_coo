@@ -103,7 +103,8 @@ class Etape(models.Model):
                "machine":self.machine.id,
                "quantite_ressource":self.quantite_ressource.id,
                "duree":self.duree,
-               "etape_suivante":self.etape_suivante.id}
+               if etape_suivante:
+                   "etape_suivante":self.etape_suivante.id}
 
 class Produit(Objet):
     premiere_etape= models.ForeignKey(

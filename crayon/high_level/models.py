@@ -93,6 +93,11 @@ class Usine(Local):
 
     def costs(self):
         return self.local.surface * self.ville.prix_m2 + self.machines.prix
+    def json(self):
+        liste_machines=[]
+        for machine in self.machines.all():
+            liste.machines.append(machine.id)
+        return {"machines": liste_machines}
 
 
 class Etape(models.Model):

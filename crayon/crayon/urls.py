@@ -17,9 +17,10 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from high_level.views import VilleJsonDetailView
+from high_level.views import VilleJsonDetailView, LocalJsonDetailView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('villes/<int:pk>/', VilleJsonDetailView.as_view(), name='ville')
+    path('locaux/<int:pk>/', LocalJsonDetailView.as_view(), name='local')
 ]

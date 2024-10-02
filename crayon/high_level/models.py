@@ -18,7 +18,7 @@ class Ville(models.Model):
 class Local(models.Model):
     ville = models.ForeignKey(
         Ville,
-        on_delete=models.PROTECT,
+        on_delete=models.PROTECT, 
     )
     nom = models.CharField(max_length=100)
     surface = models.IntegerField(default=0)

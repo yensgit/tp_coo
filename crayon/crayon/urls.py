@@ -21,6 +21,6 @@ from high_level.views import VilleJsonDetailView, LocalJsonDetailView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('villes/<int:pk>/', VilleJsonDetailView.as_view(), name='ville')
+    path('villes/<int:pk>/', VilleJsonDetailView.as_view(), name='ville'),
     path('locaux/<int:pk>/', LocalJsonDetailView.as_view(), name='local')
 ]

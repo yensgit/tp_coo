@@ -54,6 +54,9 @@ class QuantiteRessource(models.Model):
         return f"{self.ressource} {self.quantite}"
     def costs(self):
         return self.quantite*self.ressource.prix
+    def json(self):
+        return{"quantite":self.quantite,
+               "ressource":self.ressource.id}
 
 class Machine(models.Model):
     nom=models.CharField(max_length=100)

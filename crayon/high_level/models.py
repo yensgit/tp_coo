@@ -34,6 +34,9 @@ class Objet(models.Model):
     prix=models.IntegerField(default=0)
     def __str__(self):
         return self.nom
+    def json(self):
+        return{"nom":self.nom,
+               "prix":self.prix}
 
 class Siegesocial(Local):
     pass

@@ -1,4 +1,4 @@
-from high_level.models import Ville
+from .models import Ville
 
 class Ville JsonDetailView(DetailView): 
   model=Ville

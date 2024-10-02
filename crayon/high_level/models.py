@@ -103,9 +103,9 @@ class Etape(models.Model):
                "machine":self.machine.id,
                "quantite_ressource":self.quantite_ressource.id,
                "duree":self.duree}
-               if etape_suivante:
-                   d["etape_suivante"]=self.etape_suivante.id
-        return{d}
+        if etape_suivante:
+            d["etape_suivante"]=self.etape_suivante.id
+            return{d}
 
 class Produit(Objet):
     premiere_etape= models.ForeignKey(

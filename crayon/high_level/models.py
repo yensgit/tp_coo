@@ -79,7 +79,10 @@ class Usine(Local):
     def costs(self):
         return self.local.surface*self.ville.prix_m2+self.machines.prix
     def json(self):
-        return{"machine":self.machine.id}
+        nmachine=[]
+        return{"machine":
+               for machines in self.machine.all():
+                   nmachine=self.machine.id}
 
 
 class Etape(models.Model):
@@ -99,6 +102,13 @@ class Etape(models.Model):
     )
     def __str__(self):
         return self.nom
+    def json(self):
+        return{"nom":self.nom,
+               "machine":self.machine.id
+               "quantite_ressource":self.quantite_ressource.id
+               "duree":self.duree
+               "etape_suivante"self.etape_suivante.id
+              }
 
 class Produit(Objet):
     premiere_etape= models.ForeignKey(

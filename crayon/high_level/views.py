@@ -26,6 +26,7 @@ class MachineJsonDetailView(DetailView):
   model=Machine
   def render_to_response(self, context, **response_kwargs):
     return JsonResponse(self.object.json())
+    
 class UsineJsonDetailView(DetailView): 
   model=Usine
   def render_to_response(self, context, **response_kwargs):

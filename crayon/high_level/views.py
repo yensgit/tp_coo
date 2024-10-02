@@ -1,4 +1,4 @@
-from .models import Ville, Local
+from .models import Ville, Local ,Objet
 from django.http import JsonResponse
 from django.views.generic import DetailView
 

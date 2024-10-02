@@ -17,11 +17,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from high_level.views import VilleJsonDetailView, LocalJsonDetailView ,ObjetJsonDetailView
+from high_level.views import VilleJsonDetailView, LocalJsonDetailView ,ObjetJsonDetailView,QuantiteRessourceJsonDetailView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('villes/<int:pk>/', VilleJsonDetailView.as_view(), name='ville'),
     path('locaux/<int:pk>/', LocalJsonDetailView.as_view(), name='local'),
-    path('objet/<int:pk>/', ObjetJsonDetailView.as_view(), name='objet')
+    path('objet/<int:pk>/', ObjetJsonDetailView.as_view(), name='objet'),
+    path('quantite/<int:pk>/', QuantiteRessourceJsonDetailView.as_view(), name='quantite')
 ]

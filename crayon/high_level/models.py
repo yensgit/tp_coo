@@ -93,7 +93,7 @@ class Etape(models.Model):
     )
     duree=models.IntegerField(default=0)
     etape_suivante=models.ForeignKey(
-        "self",
+        "self",blank=True,null=True,
         on_delete=models.PROTECT,
     )
     def __str__(self):

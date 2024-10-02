@@ -10,9 +10,9 @@ class Ville(models.Model):
     def __str__(self):
         return self.nom
     def json(self):
-        return {"nom": nom,
-               "code postal": code_postal,
-               "prix m2": prix_m2}
+        return {"nom": self.nom,
+               "code postal": self.code_postal,
+               "prix m2": self.prix_m2}
 
 
 class Local(models.Model):

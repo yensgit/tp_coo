@@ -9,6 +9,10 @@ class Ville(models.Model):
     prix_m2 = models.IntegerField(default=0)
     def __str__(self):
         return self.nom
+    def json(self):
+        return {"nom": nom,
+               "code postal": code_postal,
+               "prix m2": prix_m2}
 
 
 class Local(models.Model):

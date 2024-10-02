@@ -99,13 +99,14 @@ class Etape(models.Model):
     def __str__(self):
         return self.nom
     def json(self):
-         d={"nom":self.nom,
+        d={"nom":self.nom,
             "machine":self.machine.id,
             "quantite_ressource":self.quantite_ressource.id,
             "duree":self.duree}
-        if etape_suivante:
+        if self.etape_suivante:
             d["etape_suivante"]=self.etape_suivante.id
-            return{d}
+            
+        return d
 
 class Produit(Objet):
     premiere_etape= models.ForeignKey(

@@ -26,5 +26,6 @@ urlpatterns = [
     path('objet/<int:pk>/', ObjetJsonDetailView.as_view(), name='objet'),
     path('quantite/<int:pk>/', QuantiteRessourceJsonDetailView.as_view(), name='quantite'),
     path('machine/<int:pk>/', MachineJsonDetailView.as_view(), name='machine'),
-    path('usine/<int:pk>/', UsineJsonDetailView.as_view(), name='usine')
+    path('usine/<int:pk>/', UsineJsonDetailView.as_view(), name='usine'),
+    path('etape/<int:pk>/', EtapeJsonDetailView.as_view(), name='etape')
 ]

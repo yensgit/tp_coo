@@ -79,7 +79,7 @@ class Usine(Local):
     def costs(self):
         return self.local.surface*self.ville.prix_m2+self.machines.prix
     def json(self):
-        return{"machine":self.machines}
+        return{"machine":self.machines.id}
 
 
 class Etape(models.Model):

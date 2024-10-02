@@ -24,6 +24,10 @@ class Local(models.Model):
     surface = models.IntegerField(default=0)
     def __str__(self):
         return f"{self.nom} {self.ville}"
+    def json(self):
+        return {"ville": self.ville.id,
+               "nom": self.nom,
+               "surface": self.surface}
 
 class Objet(models.Model):
     nom=models.CharField(max_length=100)

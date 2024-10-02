@@ -21,5 +21,5 @@ from high_level.views import Ville
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('villes/', VilleJsonDetailView.as_view(), name='ville')
+    path('villes/<int:pk>/', VilleJsonDetailView.as_view(), name='ville')
 ]

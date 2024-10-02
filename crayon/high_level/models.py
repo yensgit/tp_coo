@@ -78,6 +78,9 @@ class Usine(Local):
     machines = models.ManyToManyField(Machine)
     def costs(self):
         return self.local.surface*self.ville.prix_m2+self.machines.prix
+    def json(self):
+        return{"machine":self.machines}
+
 
 class Etape(models.Model):
     nom=models.CharField(max_length=100)

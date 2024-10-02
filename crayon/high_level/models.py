@@ -69,6 +69,10 @@ class Machine(models.Model):
         for machines in self.machine.all():
             prix_machines=prix_machines+machines.prix
         return prix_machines
+    def json(self):
+        return{"nom":self.nom,
+               "n_serie":self.n_serie,
+               "prix":self.prix}
 
 class Usine(Local):
     machines = models.ManyToManyField(Machine)

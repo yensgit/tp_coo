@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from high_level.views import VilleJsonDetailView, LocalJsonDetailView ,ObjetJsonDetailView,QuantiteRessourceJsonDetailView
+from high_level.views import VilleJsonDetailView, LocalJsonDetailView ,ObjetJsonDetailView,QuantiteRessourceJsonDetailView,MachineJsonDetailView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,4 +25,5 @@ urlpatterns = [
     path('locaux/<int:pk>/', LocalJsonDetailView.as_view(), name='local'),
     path('objet/<int:pk>/', ObjetJsonDetailView.as_view(), name='objet'),
     path('quantite/<int:pk>/', QuantiteRessourceJsonDetailView.as_view(), name='quantite')
+    path('machine/<int:pk>/', MachineJsonDetailView.as_view(), name='machine')
 ]

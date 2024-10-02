@@ -100,9 +100,9 @@ class Etape(models.Model):
         return self.nom
     def json(self):
          d={"nom":self.nom,
-               "machine":self.machine.id,
-               "quantite_ressource":self.quantite_ressource.id,
-               "duree":self.duree}
+            "machine":self.machine.id,
+            "quantite_ressource":self.quantite_ressource.id,
+            "duree":self.duree}
         if etape_suivante:
             d["etape_suivante"]=self.etape_suivante.id
             return{d}

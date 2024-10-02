@@ -96,7 +96,7 @@ class Usine(Local):
     def json(self):
         liste_machines=[]
         for machine in self.machines.all():
-            liste.machines.append(machine.id)
+            liste_machines.append(machine.id)
         return {"machines": liste_machines}
 
 

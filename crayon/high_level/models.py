@@ -69,18 +69,16 @@ class Machine(models.Model):
         for machines in self.machine.all():
             prix_machines=prix_machines+machines.prix
         return prix_machines
-    
+        def json(self):
+        return{"nom":self.nom,
+               "n_serie":self.n_serie,
+               "prix":self.prix}
 
 class Usine(Local):
     machines = models.ManyToManyField(Machine)
     def costs(self):
         return self.local.surface*self.ville.prix_m2+self.machines.prix
-    def json(self):
-        nmachine=[]
-        return{"machine":
-               for machines in self.machine.all():
-                   nmachine=self.machine.id}
-
+   
 
 class Etape(models.Model):
     nom=models.CharField(max_length=100)

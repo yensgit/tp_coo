@@ -24,6 +24,6 @@ urlpatterns = [
     path('villes/<int:pk>/', VilleJsonDetailView.as_view(), name='ville'),
     path('locaux/<int:pk>/', LocalJsonDetailView.as_view(), name='local'),
     path('objet/<int:pk>/', ObjetJsonDetailView.as_view(), name='objet'),
-    path('quantite/<int:pk>/', QuantiteRessourceJsonDetailView.as_view(), name='quantite')
+    path('quantite/<int:pk>/', QuantiteRessourceJsonDetailView.as_view(), name='quantite'),
     path('machine/<int:pk>/', MachineJsonDetailView.as_view(), name='machine')
 ]

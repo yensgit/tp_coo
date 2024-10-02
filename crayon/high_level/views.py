@@ -1,8 +1,13 @@
-from .models import Ville
+from .models import Ville, Local
 from django.http import JsonResponse
 from django.views.generic import DetailView
 
 class VilleJsonDetailView(DetailView): 
   model=Ville
+  def render_to_response(self, context, **response_kwargs):
+    return JsonResponse(self.object.json())
+
+class LocalJsonDetailView(DetailView): 
+  model=Local
   def render_to_response(self, context, **response_kwargs):
     return JsonResponse(self.object.json())

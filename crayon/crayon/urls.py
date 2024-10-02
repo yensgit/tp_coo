@@ -21,5 +21,5 @@ from .views import Ville
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('tp_coo/high_level/models/', Ville.as_view(), name='ville')
+    path('villes/', Ville.as_view(), name='ville')
 ]

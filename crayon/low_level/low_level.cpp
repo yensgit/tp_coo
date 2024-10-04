@@ -15,7 +15,7 @@ friend std::ostream& operator<<(
   std::ostream& out, const Ville& v) {
   return out<<v.nom<<"/"<<v.code_postal<<"/"<<v.prix_m2;
 }
-Ville1(json d):nom{d["nom"]},code_postal{d["code postal"]},prix_m2{d["prix m2"]} {}
+Ville (json d):nom{d["nom"]},code_postal{d["code postal"]},prix_m2{d["prix m2"]} {}
 };
 
 auto main(int argc, char** argv)-> int{
@@ -28,8 +28,8 @@ auto main(int argc, char** argv)-> int{
   json j = json::parse(r.text);
  
   const auto v1= Ville{j};
-  const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
-  std::cout<<"ville :"<< v<< std::endl;
+  #const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
+  #std::cout<<"ville :"<< v<< std::endl;
    std::cout<<"ville :"<< v1<< std::endl;
  
   return 0;

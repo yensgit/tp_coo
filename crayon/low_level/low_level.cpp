@@ -38,6 +38,9 @@ auto main(int argc, char** argv)-> int{
   //Pour le constructeur json data
   const auto v1= Ville{j};
    std::cout<<"ville 1 :"<< v1<< std::endl;
+
+  //Pour le construteur int id
+  
  
   return 0;
 }

@@ -16,6 +16,10 @@ friend std::ostream& operator<<(
   return out<<v.nom<<"/"<<v.code_postal<<"/"<<v.prix_m2;
 }
 Ville (json d):nom{d["nom"]},code_postal{d["code postal"]},prix_m2{d["prix m2"]} {}
+Ville (int id){
+ cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/"+to_string(id)+"/"}); 
+  
+}
 };
 
 auto main(int argc, char** argv)-> int{
@@ -27,7 +31,7 @@ auto main(int argc, char** argv)-> int{
   std::cout<< r.text<< std::endl;
   json j = json::parse(r.text);
  
-  //Pour le constructeur 1
+  //Pour le constructeur avec attributs
   const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
   std::cout<<"ville :"<< v<< std::endl;
 

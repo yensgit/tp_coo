@@ -16,9 +16,14 @@ friend std::ostream& operator<<(
   return out<<v.nom<<"/"<<v.code_postal<<"/"<<v.prix_m2;
 }
 Ville (json d):nom{d["nom"]},code_postal{d["code postal"]},prix_m2{d["prix m2"]} {}
-Ville (int id){
- cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/"+to_string(id)+"/"}); 
-  
+Ville(int id) {
+cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/" + to_string(id) + "/"}); 
+if (r.status_code == 200) { 
+std::cout << "Réponse JSON brute pour l'ID " << id << ": " << r.text << std::endl;
+json j = json::parse(r.text); 
+nom = j["nom"]; code_postal = j["code postal"]; prix_m2 = j["prix m2"]; } 
+  else { nom = "Inconnu"; code_postal = 0; prix_m2 = 0;
+        std::cerr << "Erreur lors de la requête HTTP pour l'ID " << id << ": " << r.status_code << std::endl; }
 }
 };
 
@@ -40,7 +45,8 @@ auto main(int argc, char** argv)-> int{
    std::cout<<"ville 1 :"<< v1<< std::endl;
 
   //Pour le construteur int id
-  
+   const auto v2 = Ville{1};
+  std::cout << "ville 2 : " << v2 << std::endl; 
  
   return 0;
 }

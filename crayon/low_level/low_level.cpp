@@ -27,10 +27,13 @@ auto main(int argc, char** argv)-> int{
   std::cout<< r.text<< std::endl;
   json j = json::parse(r.text);
  
+  //Pour le constructeur 1
+  const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
+  std::cout<<"ville :"<< v<< std::endl;
+
+  //Pour le constructeur json data
   const auto v1= Ville{j};
-  //const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
-  //std::cout<<"ville :"<< v<< std::endl;
-   std::cout<<"ville :"<< v1<< std::endl;
+   std::cout<<"ville 1 :"<< v1<< std::endl;
  
   return 0;
 }

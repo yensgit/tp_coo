@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cpr/cpr.h>
 using namespace std;
 
 class Ville{
@@ -16,5 +17,6 @@ friend std::ostream& operator<<(
 auto main()-> int{
   const auto v= Ville("Labège", 31000, 2000)
   std::cout<<"ville :"<< v<< std::endl;
+  std::cout<< r.text<< std::endl;
   return 0;
 }

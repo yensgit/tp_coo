@@ -30,13 +30,8 @@ public:
 Ville (string v, string n, int s):ville{v}, nom{n}, surface{s} {}
 friend std::ostream& operator<<(
   std::ostream& out, const Local& l) {
-  return out<<l.nom<<"/"<<l.code_postal<<"/"<<l.prix_m2;
+  return out<<l.ville<<"/"<<l.nom<<"/"<<l.surface;
 }
-Ville (json d):nom{d["nom"]},code_postal{d["code postal"]},prix_m2{d["prix m2"]} {}
-Ville(int id) {
-cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/" + to_string(id) + "/"}); 
-json j = json::parse(r.text); 
-nom = j["nom"]; code_postal = j["code postal"]; prix_m2 = j["prix m2"]; } 
 };
 auto main(int argc, char** argv)-> int{
    cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/1/"});

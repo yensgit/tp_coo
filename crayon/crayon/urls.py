@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from high_level.views import VilleJsonDetailView, LocalJsonDetailView ,ObjetJsonDetailView,QuantiteRessourceJsonDetailView,MachineJsonDetailView,UsineJsonDetailView,EtapeJsonDetailView, ProduitJsonDetailView
+from high_level.views import VilleJsonDetailView, LocalJsonDetailView ,ObjetJsonDetailView,QuantiteRessourceJsonDetailView,MachineJsonDetailView,UsineJsonDetailView,EtapeJsonDetailView, ProduitJsonDetailView, StockJsonDetailView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -28,5 +28,6 @@ urlpatterns = [
     path('machine/<int:pk>/', MachineJsonDetailView.as_view(), name='machine'),
     path('usine/<int:pk>/', UsineJsonDetailView.as_view(), name='usine'),
     path('etape/<int:pk>/', EtapeJsonDetailView.as_view(), name='etape'),
-    path('produit/<int:pk>/', ProduitJsonDetailView.as_view(), name='produit')
+    path('produit/<int:pk>/', ProduitJsonDetailView.as_view(), name='produit'),
+    path('stock/<int:pk>/', StockJsonDetailView.as_view(), name='stock')
 ]

@@ -139,6 +139,8 @@ class Produit(Objet):
         Etape,
         on_delete=models.PROTECT,
     )
+    def json(self):
+        return {"premiere etape": self.premiere_etape.id}
 
 
 class Stock(models.Model):

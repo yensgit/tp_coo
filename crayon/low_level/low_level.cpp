@@ -25,7 +25,7 @@ auto main(int argc, char** argv)-> int{
 std::cout<< r.text<< std::endl;
   json j = json::parse(r.text);
   
-  const auto v= Ville{j["nom"], j["code_postal"], j["prix_m2"]};
+  const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
   std::cout<<"ville :"<< v<< std::endl;
 
   return 0;

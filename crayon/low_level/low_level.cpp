@@ -3,6 +3,7 @@
 #include <cpr/cpr.h>
 #include <nlohmann/json.hpp>
 using namespace std;
+using json = nlohmann::json;
 
 class Ville{
 string nom;
@@ -25,5 +26,7 @@ auto main(int argc, char** argv)-> int{
   const auto v= Ville{"Labège", 31000, 2000};
   std::cout<<"ville :"<< v<< std::endl;
   std::cout<< r.text<< std::endl;
+
+  json data = json::parse(r.text);
   return 0;
 }

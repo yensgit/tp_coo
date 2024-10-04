@@ -15,7 +15,7 @@ friend std::ostream& operator<<(
 };
 
 auto main()-> int{
-  const auto v= Ville("Labège", 31000, 2000)
+  const auto v= Ville{"Labège", 31000, 2000};
   std::cout<<"ville :"<< v<< std::endl;
   std::cout<< r.text<< std::endl;
   return 0;

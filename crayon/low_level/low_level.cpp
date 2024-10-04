@@ -28,5 +28,5 @@ std::cout<< r.text<< std::endl;
   const auto v= Ville{j["nom"], j["code_postal"], j["prix_m2"]};
   std::cout<<"ville :"<< v<< std::endl;
 
-  return 0;
+  return 1;
 }

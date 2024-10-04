@@ -22,7 +22,8 @@ auto main(int argc, char** argv)-> int{
     r.status_code;                  // 200
     r.header["content-type"];       // application/json; charset=utf-8
     r.text;                         // JSON text string
-std::cout<< r.text<< std::endl;
+  
+  std::cout<< r.text<< std::endl;
   json j = json::parse(r.text);
   
   const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};

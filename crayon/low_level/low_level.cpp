@@ -28,8 +28,8 @@ auto main(int argc, char** argv)-> int{
   
   std::cout<< r.text<< std::endl;
   json j = json::parse(r.text);
-  json d = json::parse(r.text);
-  const auto v= Ville1{d["nom"], d["code postal"], d["prix m2"]};
+  
+  const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
   std::cout<<"ville :"<< v<< std::endl;
 
   return 0;

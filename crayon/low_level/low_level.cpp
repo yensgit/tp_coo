@@ -12,6 +12,7 @@ Ville (string n, int cp, int p):nom{n}, code_postal{cp}, prix_m2{p} {}
 friend std::ostream& operator<<(
   std::ostream& out, const Ville& v) {
   return out<<v.nom<<"/"<<v.code_postal<<"/"<<v.prix_m2;
+}
 };
 
 auto main(int argc, char** argv)-> int{

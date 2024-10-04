@@ -1,4 +1,4 @@
-from .models import Ville, Local ,Objet,QuantiteRessource,Machine,Usine,Etape
+from .models import Ville, Local ,Objet,QuantiteRessource,Machine,Usine,Etape, Produit
 from django.http import JsonResponse
 from django.views.generic import DetailView
 
@@ -36,4 +36,8 @@ class EtapeJsonDetailView(DetailView):
   model=Etape
   def render_to_response(self, context, **response_kwargs):
     return JsonResponse(self.object.json())
-
+    
+class ProduitJsonDetailView(DetailView): 
+  model=Produit
+  def render_to_response(self, context, **response_kwargs):
+    return JsonResponse(self.object.json())

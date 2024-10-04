@@ -22,11 +22,12 @@ auto main(int argc, char** argv)-> int{
     r.status_code;                  // 200
     r.header["content-type"];       // application/json; charset=utf-8
     r.text;                         // JSON text string
+
+  json j = json::parse(r.text);
   
-  const auto v= Ville{"Labège", 31000, 2000};
+  const auto v= Ville{j["nom"], j["code_postal"], j["prix_m2"]};
   std::cout<<"ville :"<< v<< std::endl;
   std::cout<< r.text<< std::endl;
 
-  json data = json::parse(r.text);
   return 0;
 }

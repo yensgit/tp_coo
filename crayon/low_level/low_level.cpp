@@ -17,8 +17,8 @@ friend std::ostream& operator<<(
 }
 
 Ville1(const json& data){
-  nom=data.value("nom","inconnu);
-    code_postal=data.value("code postal",0);
+  nom=data.value("nom","inconnu");
+  code_postal=data.value("code postal",0);
   prix_m2=data.value("prix m2",0);
 
 };

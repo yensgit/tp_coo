@@ -156,3 +156,5 @@ class Stock(models.Model):
 
     def costs(self):
         return self.nombre * self.quantite * self.ressource.prix
+    def json(self):
+        return {"ressource": self.ressource.id,"nombre":self.nombre, "usine": self.usine.id}

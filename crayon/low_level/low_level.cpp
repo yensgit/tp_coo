@@ -19,7 +19,7 @@ friend std::ostream& operator<<(
 Ville1(const json& data){
   nom=data.value("nom","inconnu");
   code_postal=data.value("code postal",0);
-  prix_m2=data.value("prix m2",0);
+  prix_m2=data.value("prix m2",0);}
 
 };
 
@@ -35,7 +35,7 @@ auto main(int argc, char** argv)-> int{
   
   const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
   std::cout<<"ville :"<< v<< std::endl;
-Ville1 v1{d};
+ Ville1 v1{d};
   std::cout<<"ville1 :"<< v1<< std::endl;
   return 0;
 }

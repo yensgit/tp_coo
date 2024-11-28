@@ -18,7 +18,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from high_level.views import VilleJsonDetailView, LocalJsonDetailView ,ObjetJsonDetailView,QuantiteRessourceJsonDetailView,MachineJsonDetailView,UsineJsonDetailView,EtapeJsonDetailView, ProduitJsonDetailView, StockJsonDetailView
-from high_level.views import VilleJson_ExtendedDetailView, LocalJson_ExtendedDetailView ,ObjetJson_ExtendedDetailView,QuantiteRessourceJson_ExtendedDetailView,MachineJson_ExtendedDetailView,UsineJson_ExtendedDetailView,EtapeJson_ExtendedDetailView, ProduitJson_ExtendedDetailView, StockJson_ExtendedDetailView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -32,13 +31,4 @@ urlpatterns = [
     path('produit/<int:pk>/', ProduitJsonDetailView.as_view(), name='produit'),
     path('stock/<int:pk>/', StockJsonDetailView.as_view(), name='stock'),
 
-    path('villes/<int:pk>/', VilleJson_ExtendedDetailView.as_view(), name='ville'),
-    path('locaux/<int:pk>/', LocalJson_ExtendedDetailView.as_view(), name='local'),
-    path('objet/<int:pk>/', ObjetJson_ExtendedDetailView.as_view(), name='objet'),
-    path('quantite/<int:pk>/', QuantiteRessourceJson_ExtendedDetailView.as_view(), name='quantite'),
-    path('machine/<int:pk>/', MachineJson_ExtendedDetailView.as_view(), name='machine'),
-    path('usine/<int:pk>/', UsineJson_ExtendedDetailView.as_view(), name='usine'),
-    path('etape/<int:pk>/', EtapeJson_ExtendedDetailView.as_view(), name='etape'),
-    path('produit/<int:pk>/', ProduitJson_ExtendedDetailView.as_view(), name='produit'),
-    path('stock/<int:pk>/', StockJson_ExtendedDetailView.as_view(), name='stock')
 ]

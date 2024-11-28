@@ -30,5 +30,15 @@ urlpatterns = [
     path('usine/<int:pk>/', UsineJsonDetailView.as_view(), name='usine'),
     path('etape/<int:pk>/', EtapeJsonDetailView.as_view(), name='etape'),
     path('produit/<int:pk>/', ProduitJsonDetailView.as_view(), name='produit'),
-    path('stock/<int:pk>/', StockJsonDetailView.as_view(), name='stock')
+    path('stock/<int:pk>/', StockJsonDetailView.as_view(), name='stock'),
+
+    path('villes/<int:pk>/', VilleJson_ExtendedDetailView.as_view(), name='ville'),
+    path('locaux/<int:pk>/', LocalJson_ExtendedDetailView.as_view(), name='local'),
+    path('objet/<int:pk>/', ObjetJson_ExtendedDetailView.as_view(), name='objet'),
+    path('quantite/<int:pk>/', QuantiteRessourceJson_ExtendedDetailView.as_view(), name='quantite'),
+    path('machine/<int:pk>/', MachineJson_ExtendedDetailView.as_view(), name='machine'),
+    path('usine/<int:pk>/', UsineJson_ExtendedDetailView.as_view(), name='usine'),
+    path('etape/<int:pk>/', EtapeJson_ExtendedDetailView.as_view(), name='etape'),
+    path('produit/<int:pk>/', ProduitJson_ExtendedDetailView.as_view(), name='produit'),
+    path('stock/<int:pk>/', StockJson_ExtendedDetailView.as_view(), name='stock')
 ]

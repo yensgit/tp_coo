@@ -17,6 +17,12 @@ class Ville(models.Model):
             "code postal": self.code_postal,
             "prix m2": self.prix_m2,
         }
+    def json(self):
+    return {
+        "nom": self.nom,
+        "code postal": self.code_postal,
+        "prix m2": self.prix_m2,
+    }
 
 
 class Local(models.Model):
@@ -77,28 +83,37 @@ class Machine(models.Model):
 
     def __str__(self):
         return f"{self.nom} {self.n_serie}"
-
     def costs(self):
-        prix_machines = 0
-        for machines in self.machine.all():
-            prix_machines = prix_machines + machines.prix
-        return prix_machines
-
+        return self.prix
     def json(self):
         return {"nom": self.nom, "n_serie": self.n_serie, "prix": self.prix}
-
-
+   # def costs(self):
+        #prix_machines = 0
+        #for machines in self.machine.all():
+           # prix_machines = prix_machines + machines.prix
+       # return prix_machines 
 class Usine(Local):
     machines = models.ManyToManyField(Machine)
 
-    def costs(self):
-        return self.local.surface * self.ville.prix_m2 + self.machines.prix
+    #def costs(self):
+        #return self.local.surface * self.ville.prix_m2 + self.machines.prix
     def json(self):
         liste_machines=[]
         for machine in self.machines.all():
             liste_machines.append(machine.id)
-        return {"machines": liste_machines}
+            return {"machines": liste_machines}
+    def costs(self):
+        prix_machine = 0
+        prix_stock = 0
+    
+    for machines in Machine.objects.all():
+        prix_machine = prix_machine + machines.prix
+    
+    for stock in Stock.objects.all():
+        prix_stock = prix_stock + stock.ressource.prix * stock.nombre
 
+    prix_local = self.surface * self.ville.prix_m2
+    return prix_machine + prix_stock + prix_local
 
 class Etape(models.Model):
     nom = models.CharField(max_length=100)

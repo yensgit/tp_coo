@@ -47,7 +47,7 @@ class StockJsonDetailView(DetailView):
   def render_to_response(self, context, **response_kwargs):
     return JsonResponse(self.object.json())
 
-class ProjetAPIView(APIView):
+class ProjetAPIView(DetailView):
   model=Usine
   def render_to_response(self, context, **response_kwargs):
     return JsonResponse(self.object.json_extended())

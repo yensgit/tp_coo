@@ -108,14 +108,14 @@ class Usine(Local):
         
         for machines in self.machines.all():
             liste_machines.append(machines.id)
-            return {"machines": liste_machines,
+        return {"machines": liste_machines,
                     **super().json()}
     def json_extended(self):
         liste_machines=[]
     
         for machines in self.machines.all():
             liste_machines.append(machines.json_extended())
-            return {"machines": liste_machines,
+        return {"machines": liste_machines,
                    **super().json_extended()}
     def costs(self):
         prix_machine = 0

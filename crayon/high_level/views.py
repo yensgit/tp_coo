@@ -1,6 +1,9 @@
 from .models import Ville, Local ,Objet,QuantiteRessource,Machine,Usine,Etape, Produit, Stock
 from django.http import JsonResponse
 from django.views.generic import DetailView
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework import status
 
 class VilleJsonDetailView(DetailView): 
   model=Ville

@@ -18,7 +18,7 @@ class Ville(models.Model):
             "prix m2": self.prix_m2,
         }
     def json_extended(self):
-    return {
+        return {
         "nom": self.nom,
         "code postal": self.code_postal,
         "prix m2": self.prix_m2,

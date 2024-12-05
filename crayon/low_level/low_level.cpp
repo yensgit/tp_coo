@@ -51,7 +51,7 @@ auto main(int argc, char** argv)-> int{
    std::cout<<"ville 1 :"<< v1<< std::endl;
 
   //Pour le construteur int id
-   const auto v2 = Ville{1};
+   const auto v2 = Ville{2};
   std::cout << "ville 2 : " << v2 << std::endl; 
  
   return 0;

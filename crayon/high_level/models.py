@@ -105,13 +105,15 @@ class Usine(Local):
         #return self.local.surface * self.ville.prix_m2 + self.machines.prix
     def json(self):
         liste_machines=[]
-        for machine in self.machines.all():
+        for machines in Machine.objects.all():
+        #for machine in self.machines.all():
             liste_machines.append(machine.id)
             return {"machines": liste_machines,
                     **super().json()}
     def json_extended(self):
         liste_machines=[]
-        for machine in self.machines.all():
+        for machines in Machine.objects.all():
+        #for machine in self.machines.all():
             liste_machines.append(machine.json_extended())
             return {"machines": liste_machines,
                    **super().json_extended()}

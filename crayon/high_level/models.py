@@ -122,6 +122,7 @@ class Usine(Local):
         prix_stock = prix_stock + stock.ressource.prix * stock.nombre
 
     prix_local = self.surface * self.ville.prix_m2
+    
     return prix_machine + prix_stock + prix_local
 
 class Etape(models.Model):

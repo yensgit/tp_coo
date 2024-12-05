@@ -114,14 +114,12 @@ class Usine(Local):
     def costs(self):
         prix_machine = 0
         prix_stock = 0
-    
-    for machines in Machine.objects.all():
-        prix_machine = prix_machine + machines.prix
-    
-    for stock in Stock.objects.all():
-        prix_stock = prix_stock + stock.ressource.prix * stock.nombre
-        prix_local = self.surface * self.ville.prix_m2
-    return prix_machine + prix_stock + prix_local
+        for machines in Machine.objects.all():
+            prix_machine = prix_machine + machines.prix
+        for stock in Stock.objects.all():
+            prix_stock = prix_stock + stock.ressource.prix * stock.nombre
+            prix_local = self.surface * self.ville.prix_m2
+        return prix_machine + prix_stock + prix_local
 
 class Etape(models.Model):
     nom = models.CharField(max_length=100)

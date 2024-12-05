@@ -22,17 +22,17 @@ json j = json::parse(r.text);
 nom = j["nom"]; code_postal = j["code postal"]; prix_m2 = j["prix m2"]; } 
 };
 
-/*class Local{
+class Local{
 std::unique_ptr <Ville> ville;
 string nom;
 int surface;
 public:
-Ville (string v, string n, int s):ville{v}, nom{n}, surface{s} {}
+Local (string v, string n, int s):ville{v}, nom{n}, surface{s} {}
 friend std::ostream& operator<<(
   std::ostream& out, const Local& l) {
   return out<<l.ville<<"/"<<l.nom<<"/"<<l.surface;
 }
-};*/
+};
 auto main(int argc, char** argv)-> int{
    cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/1/"});
     r.status_code;                  // 200

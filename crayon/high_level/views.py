@@ -1,14 +1,6 @@
 from .models import Ville, Local ,Objet,QuantiteRessource,Machine,Usine,Etape, Produit, Stock
 from django.http import JsonResponse
 from django.views.generic import DetailView
-#from rest_framework.views import APIView
-#from rest_framework.permissions import IsAuthenticated, AllowAny
-#from rest_framework.response import Response
-#from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import authentication, permissions
-from django.contrib.auth.models import User
 
 class VilleJsonDetailView(DetailView): 
   model=Ville
@@ -58,5 +50,5 @@ class StockJsonDetailView(DetailView):
 class ProjetAPIView(APIView):
   model=Usine
   def render_to_response(self, context, **response_kwargs):
-    return JsonResponse(self.object.json())
+    return JsonResponse(self.object.json_extended())
     

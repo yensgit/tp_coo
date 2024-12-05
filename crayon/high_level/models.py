@@ -91,6 +91,8 @@ class Machine(models.Model):
         return self.prix
     def json(self):
         return {"nom": self.nom, "n_serie": self.n_serie, "prix": self.prix}
+    def json_extended(self):
+        return {"nom": self.nom, "n_serie": self.n_serie, "prix": self.prix}
    # def costs(self):
         #prix_machines = 0
         #for machines in self.machine.all():

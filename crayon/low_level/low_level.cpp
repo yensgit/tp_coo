@@ -27,7 +27,7 @@ std::unique_ptr <Ville> ville;
 string nom;
 int surface;
 public:
-Local (string v, string n, int s):ville{v}, nom{n}, surface{s} {}
+Local (int v, string n, int s):ville{std::make_shared<Ville>(v)}, nom{n}, surface{s} {}
 friend std::ostream& operator<<(
   std::ostream& out, const Local& l) {
   return out<<*l.ville<<"/"<<l.nom<<"/"<<l.surface;

@@ -30,7 +30,7 @@ public:
 Local (string v, string n, int s):ville{v}, nom{n}, surface{s} {}
 friend std::ostream& operator<<(
   std::ostream& out, const Local& l) {
-  return out<<l.ville<<"/"<<l.nom<<"/"<<l.surface;
+  return out<<l->ville<<"/"<<l.nom<<"/"<<l.surface;
 }
 };
 auto main(int argc, char** argv)-> int{

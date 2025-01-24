@@ -58,7 +58,6 @@ auto main(int argc, char** argv)-> int{
   //Pour le construteur int id
    const auto l= Local{j["ville"], j["nom"], j["surface"]};
   std::cout<<"local :"<< l<< std::endl;
-  const auto l1= Local{j};
-   std::cout<<"Local 1 :"<< l1<< std::endl;
+
   return 0;
 }

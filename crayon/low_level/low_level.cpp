@@ -36,7 +36,7 @@ Local(json d) : ville{std::make_unique<Ville>(d["ville"])}, nom{d["nom"]}, surfa
 Local(int id) {
 cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/local/" + to_string(id) + "/"}); 
 json j = json::parse(r.text); 
- ville= j["ville"];nom = j["nom"];surface= j["code postal"]; } 
+ville=std::make_unique<Ville>=j["ville"];nom = j["nom"];surface= j["code postal"]; } 
 
 };
 auto main(int argc, char** argv)-> int{

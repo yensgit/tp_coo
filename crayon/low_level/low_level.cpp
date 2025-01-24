@@ -32,7 +32,7 @@ friend std::ostream& operator<<(
   std::ostream& out, const Local& l) {
   return out<<*l.ville<<"/"<<l.nom<<"/"<<l.surface;
 }
-Local(json d):std::make_unique<Ville>{d["ville"]},nom{d["nom"]},surface{d["surface"]} {}
+Local(json d):make_unique<Ville>{d["ville"]},nom{d["nom"]},surface{d["surface"]} {}
 };
 auto main(int argc, char** argv)-> int{
    cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/1/"});

@@ -34,7 +34,7 @@ friend std::ostream& operator<<(
 
 };
     
-class Objet(models.Model):
+class Objet
     
 class Siegesocial(Local):
     
@@ -43,15 +43,15 @@ class Ressource(Objet):
     
 
 
-class QuantiteRessource(models.Model):
+class QuantiteRessource
     
 
-class Machine(models.Model):
+class Machine
   
 class Usine(Local):
     
 
-class Etape(models.Model):
+class Etape
     
 
 class Produit(Objet):

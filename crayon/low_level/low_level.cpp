@@ -77,9 +77,5 @@ auto main(int argc, char** argv)-> int{
   const auto ob1 = Objet{2};
   std::cout << "objet: " << ob1 << std::endl; 
 
-  const auto l= Local{j2["nom"], j2["ville"], j2["surface"]};
-  std::cout<<"local :"<< l<< std::endl;
-  
-
   return 0;
 }

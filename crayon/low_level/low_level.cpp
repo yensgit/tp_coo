@@ -21,7 +21,45 @@ cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/" + to_string(
 json j = json::parse(r.text); 
 nom = j["nom"]; code_postal = j["code postal"]; prix_m2 = j["prix m2"]; } 
 };
+class Local{
+std::unique_ptr <Ville> ville;
+string nom;
+int surface;
+public:
+Local (int v, string n, int s):ville{std::make_unique<Ville>(v)}, nom{n}, surface{s} {}
+friend std::ostream& operator<<(
+  std::ostream& out, const Local& l) {
+  return out<<*l.ville<<"/"<<l.nom<<"/"<<l.surface;
+}
 
+};
+    
+class Objet(models.Model):
+    
+class Siegesocial(Local):
+    
+
+class Ressource(Objet):
+    
+
+
+class QuantiteRessource(models.Model):
+    
+
+class Machine(models.Model):
+  
+class Usine(Local):
+    
+
+class Etape(models.Model):
+    
+
+class Produit(Objet):
+    
+
+
+class Stock(models.Model):
+    
 auto main(int argc, char** argv)-> int{
    cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/1/"});
     r.status_code;                  // 200

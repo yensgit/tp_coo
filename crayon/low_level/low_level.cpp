@@ -52,6 +52,7 @@ nom = j["nom"]; prix = j["prix"]; }
     
 auto main(int argc, char** argv)-> int{
    cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/1/"});
+  cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/objet/1/"});
     r.status_code;                  // 200
     r.header["content-type"];       // application/json; charset=utf-8
     r.text;                         // JSON text string

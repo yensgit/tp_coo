@@ -84,7 +84,7 @@ class Usine {
 public:
 Usine(int l) : local{std::make_unique<Local>(l)} {}
 Usine(json d)
-        : local(std::make_unique<Local>(d["local"]["ville"], d["local"]["nom"], d["local"]["surface"])),
+        : local(std::make_unique<Local>(d["local"]["ville"], d["local"]["nom"], d["local"]["surface"]))
           {}
 Usine(int id) {
         cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/" + to_string(id) + "/"});

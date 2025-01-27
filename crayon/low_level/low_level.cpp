@@ -67,7 +67,7 @@ int quantite;
 public:
 QuantiteRessource(int r, int q) : objet{std::make_unique<Objet>(r)},quantite{q} {}
 QuantiteRessource(json d)
-        : objet(std::make_unique<Objet>(d["objet"])),
+        : objet(std::make_unique<Objet>(d["objet"]["nom"]), d["objet"]["prix"]),
           quantite{d["quantite"]} {}
 QuantiteRessource(int id) {
         cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/" + to_string(id) + "/"});
@@ -105,7 +105,7 @@ auto main(int argc, char** argv)-> int{
    std::cout<< r2.text<< std::endl;
   json j2 = json::parse(r2.text);
 
-  cpr::Response r3= cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/1/"});
+  cpr::Response r3= cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/2/"});
   r3.status_code;                  // 200
     r3.header["content-type"];       // application/json; charset=utf-8
     r3.text;  

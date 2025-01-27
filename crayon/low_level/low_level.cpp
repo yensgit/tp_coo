@@ -65,7 +65,7 @@ auto main(int argc, char** argv)-> int{
     r1.header["content-type"];       // application/json; charset=utf-8
     r1.text;  
    std::cout<< r1.text<< std::endl;
-  json j = json::parse(r1.text);
+  json j1 = json::parse(r1.text);
   //Pour le constructeur avec attributs
   const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
   std::cout<<"ville :"<< v<< std::endl;
@@ -79,7 +79,7 @@ auto main(int argc, char** argv)-> int{
   std::cout << "ville 2 : " << v2 << std::endl; 
   
   //Pour le constructeur avec attributs
-  const auto ob= Objet{j["nom"], j["prix"]};
+  const auto ob= Objet{j1["nom"], j1["prix"]};
   std::cout<<"objet :"<< ob<< std::endl;
 
   return 0;

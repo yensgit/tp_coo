@@ -50,30 +50,6 @@ json j = json::parse(r.text);
 nom = j["nom"]; prix = j["prix"]; }
 };
     
-class Siegesocial(Local):
-    
-
-class Ressource(Objet):
-    
-
-
-class QuantiteRessource
-    
-
-class Machine
-  
-class Usine(Local):
-    
-
-class Etape
-    
-
-class Produit(Objet):
-    
-
-
-class Stock(models.Model):
-    
 auto main(int argc, char** argv)-> int{
    cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/1/"});
     r.status_code;                  // 200

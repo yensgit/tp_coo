@@ -23,18 +23,35 @@ nom = j["nom"]; code_postal = j["code postal"]; prix_m2 = j["prix m2"]; }
 };
 
 class Local {
-    std::unique_ptr<Ville> ville;
-    string nom;
-    int surface;
+ private:
+  string nom_local;
+  unique_ptr<Ville> p_ville;
+  int surface_local;
+  int ville;
 
-public:
-    // Constructeur modifié pour accepter std::unique_ptr<Ville>
-    Local(std::unique_ptr<Ville> v, string n, int s)
-        : ville{std::move(v)}, nom{n}, surface{s} {}
+ public:
+  Local(string nom_local_, int surface_local_, int ville_)
+      : nom_local(nom_local_), ville(ville_), surface_local(surface_local_) {
+    p_ville = make_unique<Ville>(ville);
+  }
 
-    friend std::ostream& operator<<(std::ostream& out, const Local& l) {
-        return out << *l.ville << "/" << l.nom << "/" << l.surface;
-    }
+  Local(const json& data)
+      : nom_local(data["nom_local"]),
+        surface_local(data["surface_local"]),
+        ville(data["ville"]) {
+    p_ville = make_unique<Ville>(ville);
+  }
+
+  Local(int id) {
+    cpr::Response r = cpr::Get(
+        cpr::Url{"http://127.0.0.1:8000/local/" + to_string(id) + "/"});
+
+    json j = json::parse(r.text);
+    nom_local = j["nom_local"];
+    surface_local = j["surface_local"];
+    ville = j["ville"];
+    p_ville = make_unique<Ville>(ville);
+  }
 
 };
 auto main(int argc, char** argv)-> int{
@@ -57,13 +74,8 @@ auto main(int argc, char** argv)-> int{
   //Pour le construteur int id
    const auto v2 = Ville{2};
   std::cout << "ville 2 : " << v2 << std::endl; 
-// Exemple d'utilisation corrigé dans main
-const auto l = Local{
-    std::make_unique<Ville>(j["ville"]),  // Crée un unique_ptr avec Ville
-    j["nom"],
-    j["surface"]
-};
-std::cout << "local : " << l << std::endl;
-
+//pour l'affichage du local
+  const auto l= Local{j["nom"], j["ville"], j["surface"]};
+    std::cout << "local : " << l << std::endl; 
   return 0;
 }

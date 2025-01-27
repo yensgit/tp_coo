@@ -15,7 +15,11 @@ friend std::ostream& operator<<(
   std::ostream& out, const Ville& v) {
   return out<<v.nom<<"/"<<v.code_postal<<"/"<<v.prix_m2;
 }
-
+Ville (json d):nom{d["nom"]},code_postal{d["code postal"]},prix_m2{d["prix m2"]} {}
+Ville(int id) {
+cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/" + to_string(id) + "/"}); 
+json j = json::parse(r.text); 
+nom = j["nom"]; code_postal = j["code postal"]; prix_m2 = j["prix m2"]; } 
 };
 
 class Objet{

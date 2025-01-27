@@ -60,25 +60,21 @@ json j = json::parse(r.text);
 nom = j["nom"]; prix = j["prix"]; }
 };
 
-class QuantiteRessource {
-    std::unique_ptr<Objet> objet;
-int quantite;
-
+class Machine{
+string nom;
+int n_serie;
+int prix;
 public:
-QuantiteRessource(int r, int q) : objet{std::make_unique<Objet>(r)},quantite{q} {}
-QuantiteRessource(json d)
-        : objet(std::make_unique<Objet>(d["objet"]["nom"]), d["objet"]["prix"]),
-          quantite{d["quantite"]} {}
-QuantiteRessource(int id) {
-        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/" + to_string(id) + "/"});
-        json j = json::parse(r.text);
-        objet = make_unique<Objet>(j["objet"]);  // Assurez-vous que la ville est correctement définie dans la réponse JSON
-        quantite = j["quantite"];
-    }
-
-    friend std::ostream& operator<<(std::ostream& out, const QuantiteRessource& qr) {
-        return out << *qr.objet << "/" << qr.quantite;
-    }
+Machine (string n, int ns, int p):nom{n}, n_serie{ns}, prix{p} {}
+friend std::ostream& operator<<(
+  std::ostream& out, const Machine& m) {
+  return out<<m.nom<<"/"<<m.n_serie<<"/"<<m.prix;
+  }
+Machine(json d):nom{d["nom"]},n_serie{d["n_serie"]},prix{d["prix"]} {}
+Machine(int id) {
+cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/machine/" + to_string(id) + "/"}); 
+json j = json::parse(r.text); 
+nom = j["nom"]; n_serie = j["n_serie"]; prix = j["prix"]; }
 };
 
 auto main(int argc, char** argv)-> int{
@@ -105,7 +101,7 @@ auto main(int argc, char** argv)-> int{
    std::cout<< r2.text<< std::endl;
   json j2 = json::parse(r2.text);
 
-  cpr::Response r3= cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/2/"});
+  cpr::Response r3= cpr::Get(cpr::Url{"http://127.0.0.1:8000/machine/1/"});
   r3.status_code;                  // 200
     r3.header["content-type"];       // application/json; charset=utf-8
     r3.text;  
@@ -134,8 +130,11 @@ auto main(int argc, char** argv)-> int{
 const auto l= Local{j2["ville"], j2["nom"], j2["surface"]};
   std::cout<<"local :"<< l<< std::endl;
   
-    const auto qr= QuantiteRessource{j3["objet"], j3["quantite"]};
-  std::cout<<"quantite de ressource :"<< qr<< std::endl;
+const auto m1= Machine{j3["nom"], j3["n_serie"], j3["prix"]};
+  std::cout<<"machine 1 :"<< m1<< std::endl;
+
+  const auto m2 = Machine{2};
+  std::cout << "machine 2: " << m2 << std::endl; 
 
   return 0;
 }

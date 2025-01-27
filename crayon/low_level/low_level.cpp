@@ -22,16 +22,19 @@ json j = json::parse(r.text);
 nom = j["nom"]; code_postal = j["code postal"]; prix_m2 = j["prix m2"]; } 
 };
 
-class Local{
-std::unique_ptr <Ville> ville;
-string nom;
-int surface;
+class Local {
+    std::unique_ptr<Ville> ville;
+    string nom;
+    int surface;
+
 public:
-Local (int v, string n, int s):ville{std::make_unique<Ville>(v)}, nom{n}, surface{s} {}
-friend std::ostream& operator<<(
-  std::ostream& out, const Local& l) {
-  return out<<*l.ville<<"/"<<l.nom<<"/"<<l.surface;
-}
+    // Constructeur modifié pour accepter std::unique_ptr<Ville>
+    Local(std::unique_ptr<Ville> v, string n, int s)
+        : ville{std::move(v)}, nom{n}, surface{s} {}
+
+    friend std::ostream& operator<<(std::ostream& out, const Local& l) {
+        return out << *l.ville << "/" << l.nom << "/" << l.surface;
+    }
 
 };
 auto main(int argc, char** argv)-> int{
@@ -54,10 +57,13 @@ auto main(int argc, char** argv)-> int{
   //Pour le construteur int id
    const auto v2 = Ville{2};
   std::cout << "ville 2 : " << v2 << std::endl; 
-
-  //Pour le construteur int id
-   const auto l= Local{make_unique<Ville>(j["ville"]), j["nom"], j["surface"]};
-  std::cout<<"local :"<< l<< std::endl;
+// Exemple d'utilisation corrigé dans main
+const auto l = Local{
+    std::make_unique<Ville>(j["ville"]),  // Crée un unique_ptr avec Ville
+    j["nom"],
+    j["surface"]
+};
+std::cout << "local : " << l << std::endl;
 
   return 0;
 }

@@ -34,7 +34,21 @@ friend std::ostream& operator<<(
 
 };
     
-class Objet
+class Objet{
+string nom;
+int prix;
+public:
+Objet (string n, int p):nom{n},prix{p} {}
+friend std::ostream& operator<<(
+  std::ostream& out, const Objet& ob) {
+  return out<<ob.nom<<"/"<<ob.prix;
+  }
+Objet(json d):nom{d["nom"]},prix{d["prix"]} {}
+Objet(int id) {
+cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/objet/" + to_string(id) + "/"}); 
+json j = json::parse(r.text); 
+nom = j["nom"]; prix = j["prix"]; }
+};
     
 class Siegesocial(Local):
     
@@ -80,6 +94,10 @@ auto main(int argc, char** argv)-> int{
   //Pour le construteur int id
    const auto v2 = Ville{2};
   std::cout << "ville 2 : " << v2 << std::endl; 
+  
+  //Pour le constructeur avec attributs
+  const auto ob= Objet{j["nom"], j["prix"]};
+  std::cout<<"objet :"<< ob<< std::endl;
 
   return 0;
 }

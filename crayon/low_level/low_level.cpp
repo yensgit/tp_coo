@@ -61,23 +61,23 @@ nom = j["nom"]; prix = j["prix"]; }
 };
 
 class QuantiteRessource {
-    std::unique_ptr<Ressource> ressource;
+    std::unique_ptr<Objet> objet;
 int quantite;
 
 public:
-QuantiteRessource(int r, int q) : ressource{std::make_unique<Ressource>(r)},quantite{q} {}
+QuantiteRessource(int r, int q) : objet{std::make_unique<Objet>(r)},quantite{q} {}
 QuantiteRessource(json d)
-        : ressource(std::make_unique<Ressource>(d["ressource"])),
+        : objet(std::make_unique<Objet>(d["objet"])),
           quantite{d["quantite"]} {}
 QuantiteRessource(int id) {
         cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/" + to_string(id) + "/"});
         json j = json::parse(r.text);
-        ressource = make_unique<ressource>(j["ressource"]);  // Assurez-vous que la ville est correctement définie dans la réponse JSON
+        objet = make_unique<Objet>(j["objet"]);  // Assurez-vous que la ville est correctement définie dans la réponse JSON
         quantite = j["quantite"];
     }
 
     friend std::ostream& operator<<(std::ostream& out, const QuantiteRessource& qr) {
-        return out << qr.ressource << "/" << qr.quantite;
+        return out << *qr.objet << "/" << qr.quantite;
     }
 };
 
@@ -134,7 +134,7 @@ auto main(int argc, char** argv)-> int{
 const auto l= Local{j2["ville"], j2["nom"], j2["surface"]};
   std::cout<<"local :"<< l<< std::endl;
   
-    const auto qr= QuantiteRessource{j3["ressource"], j3["quantite"]};
+    const auto qr= QuantiteRessource{j3["objet"], j3["quantite"]};
   std::cout<<"quantite de ressource :"<< qr<< std::endl;
 
   return 0;

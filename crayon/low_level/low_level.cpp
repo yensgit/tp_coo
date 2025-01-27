@@ -27,11 +27,6 @@ friend std::ostream& operator<<(
   std::ostream& out, const Local& l) {
   return out<<*l.ville<<"/"<<l.nom<<"/"<<l.surface;
 }
-Local (json d):nom{d["nom"]}, make_unique<Ville>({d["ville"])},surface{d["surface"]} {}
-Local(int id) {
-cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/locaux/" + to_string(id) + "/"}); 
-json j = json::parse(r.text); 
-nom = j["nom"]; ville = make_unique<Ville>(j["ville"]); surface = j["surface"]; } 
 };
     
 class Objet{

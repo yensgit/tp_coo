@@ -59,7 +59,28 @@ cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/objet/" + to_string(i
 json j = json::parse(r.text); 
 nom = j["nom"]; prix = j["prix"]; }
 };
-    
+
+class QuantiteRessource {
+    std::unique_ptr<Ressource> ressource;
+int quantite;
+
+public:
+QuantiteRessource(int r, int q) : ressource{std::make_unique<Ressource>(r)},quantite{q} {}
+QuantiteRessource(json d)
+        : ressource(std::make_unique<Ressource>(d["ressource"])),
+          quantite{d["quantite"]} {}
+QuantiteRessource(int id) {
+        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/" + to_string(id) + "/"});
+        json j = json::parse(r.text);
+        ressource = make_unique<Ressource>(j["ressource"]);  // Assurez-vous que la ville est correctement définie dans la réponse JSON
+        quantite = j["quantite"];
+    }
+
+    friend std::ostream& operator<<(std::ostream& out, const QuantiteRessource& qr) {
+        return out << *qr.ressource << "/" << qr.quantite <<;
+    }
+};
+
 auto main(int argc, char** argv)-> int{
    cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/1/"});
   

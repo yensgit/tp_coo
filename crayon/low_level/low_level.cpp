@@ -27,17 +27,12 @@ class Local {
     int surface;
 
 public:
-    // Constructeur avec un ID de ville, un nom et une surface
-    Local(int v, string n, int s) : ville{std::make_unique<Ville>(v)}, nom{n}, surface{s} {}
-
-    // Constructeur avec un objet JSON
-    Local(json d)
+Local(int v, string n, int s) : ville{std::make_unique<Ville>(v)}, nom{n}, surface{s} {}
+Local(json d)
         : ville(std::make_unique<Ville>(d["ville"]["nom"], d["ville"]["code_postal"], d["ville"]["prix m2"])),
           nom{d["nom"]},
           surface{d["surface"]} {}
-
-    // Constructeur avec un ID pour récupérer les informations de la ville
-    Local(int id) {
+Local(int id) {
         cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/locaux/" + to_string(id) + "/"});
         json j = json::parse(r.text);
         ville = make_unique<Ville>(j["ville"]);  // Assurez-vous que la ville est correctement définie dans la réponse JSON

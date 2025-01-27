@@ -128,7 +128,7 @@ auto main(int argc, char** argv)-> int{
     r3.text;  
    std::cout<< r3.text<< std::endl;
   json j3 = json::parse(r3.text);
-  cpr::Response r4= cpr::Get(cpr::Url{"http://127.0.0.1:8000/machine/1/"});
+  cpr::Response r4= cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/1/"});
   r4.status_code;                  // 200
     r4.header["content-type"];       // application/json; charset=utf-8
     r4.text;  

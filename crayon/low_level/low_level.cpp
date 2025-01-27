@@ -82,7 +82,7 @@ auto main(int argc, char** argv)-> int{
   const auto ob= Objet{j1["nom"], j1["prix"]};
   std::cout<<"objet :"<< ob<< std::endl;
   
-  const auto ob1 = Objet{1};
+  const auto ob1 = Objet{2};
   std::cout << "objet: " << ob1 << std::endl; 
   
 

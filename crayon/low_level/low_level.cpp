@@ -72,7 +72,7 @@ QuantiteRessource(json d)
 QuantiteRessource(int id) {
         cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/" + to_string(id) + "/"});
         json j = json::parse(r.text);
-        ressource = make_unique<Ressource>(j["ressource"]);  // Assurez-vous que la ville est correctement définie dans la réponse JSON
+        ressource = make_unique<ressource>(j["ressource"]);  // Assurez-vous que la ville est correctement définie dans la réponse JSON
         quantite = j["quantite"];
     }
 

@@ -51,7 +51,12 @@ class Local {
     surface_local = j["surface_local"];
     ville = j["ville"];
     p_ville = make_unique<Ville>(ville);
+    
   }
+  void afficher1() const {
+    cout << "Nom du local: " << nom_local << endl;
+    cout << "Surface du local: " << surface_local << " m2" << endl;
+    cout << "ID de la ville: " << ville << endl;}
 
 };
 auto main(int argc, char** argv)-> int{
@@ -75,7 +80,7 @@ auto main(int argc, char** argv)-> int{
    const auto v2 = Ville{2};
   std::cout << "ville 2 : " << v2 << std::endl; 
 //pour l'affichage du local
-  const auto l= Local{j["nom"], j["ville"], j["surface"]};
-    std::cout << "local : " << l << std::endl; 
+  const auto l= Local{1};
+    l.afficher1();
   return 0;
 }

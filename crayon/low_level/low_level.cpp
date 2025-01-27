@@ -104,6 +104,13 @@ auto main(int argc, char** argv)-> int{
     r2.text;  
    std::cout<< r2.text<< std::endl;
   json j2 = json::parse(r2.text);
+
+  cpr::Response r3= cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/1/"});
+  r3.status_code;                  // 200
+    r3.header["content-type"];       // application/json; charset=utf-8
+    r3.text;  
+   std::cout<< r3.text<< std::endl;
+  json j3 = json::parse(r3.text);
   
   //Pour le constructeur avec attributs
   const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
@@ -126,6 +133,9 @@ auto main(int argc, char** argv)-> int{
   
 const auto l= Local{j2["ville"], j2["nom"], j2["surface"]};
   std::cout<<"local :"<< l<< std::endl;
+  
+    const auto qr= QuantiteRessource{j3["ressource"], j3["quantite"]};
+  std::cout<<"quantite de ressource :"<< qr<< std::endl;
 
   return 0;
 }

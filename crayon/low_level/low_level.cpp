@@ -35,7 +35,7 @@ Local(json d)
 Local(int id) {
         cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/locaux/" + to_string(id) + "/"});
         json j = json::parse(r.text);
-        ville = make_unique<Ville>(j["ville"]);  // Assurez-vous que la ville est correctement définie dans la réponse JSON
+        ville = make_unique<Ville>(j["ville"]);  
         nom = j["nom"];
         surface = j["surface"];
     }
@@ -75,6 +75,27 @@ Machine(int id) {
 cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/machine/" + to_string(id) + "/"}); 
 json j = json::parse(r.text); 
 nom = j["nom"]; n_serie = j["n_serie"]; prix = j["prix"]; }
+};
+
+class Usine {
+    std::unique_ptr<Local> local;
+    std::vector<std::unique_ptr<Machine>> machine;
+
+public:
+Usine(int l) : local{std::make_unique<Local>(l)} {}
+Usine(json d)
+        : local(std::make_unique<Local>(d["local"]["ville"], d["local"]["nom"], d["local"]["surface"])),
+          {}
+Local(int id) {
+        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/" + to_string(id) + "/"});
+        json j = json::parse(r.text);
+        local = make_unique<Local>(j["local"]);  
+        
+    }
+
+    friend std::ostream& operator<<(std::ostream& out, const Usine& u) {
+        return out << *u.local ;
+    }
 };
 
 auto main(int argc, char** argv)-> int{

@@ -77,7 +77,7 @@ QuantiteRessource(int id) {
     }
 
     friend std::ostream& operator<<(std::ostream& out, const QuantiteRessource& qr) {
-        return out << *qr.ressource << "/" << qr.quantite <<;
+        return out << qr.ressource << "/" << qr.quantite <<;
     }
 };
 

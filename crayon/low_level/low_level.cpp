@@ -80,45 +80,7 @@ nom = j["nom"]; n_serie = j["n_serie"]; prix = j["prix"]; }
 };
 
 
-class Usine : public Local {
-    vector<Machine> machines;  // Liste des machines de l'usine
 
-public:
-    // Constructeur de l'usine avec un identifiant de ville, un nom et une surface
-    Usine(int v, string n, int s) : Local(v, n, s) {}
-
-    // Constructeur prenant un objet JSON
-    Usine(json d) : Local(d["local"]) {
-        for (const auto& machine_data : d["machines"]) {
-            machines.push_back(Machine(machine_data));
-        }
-    }
-
-    // Constructeur prenant un identifiant pour l'usine
-    Usine(int id) {
-        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/" + to_string(id) + "/"});
-        json j = json::parse(r.text);
-
-        // Initialisation du local
-        this->ville = std::make_unique<Ville>(j["local"]["ville"]);
-        nom = j["local"]["nom"];
-        surface = j["local"]["surface"];
-
-        // Initialisation des machines
-        for (const auto& machine_data : j["machines"]) {
-            machines.push_back(Machine(machine_data));
-        }
-    }
-
-    // Affichage des informations de l'usine
-    friend std::ostream& operator<<(std::ostream& out, const Usine& u) {
-        out << "Usine: " << *u.ville << "/" << u.nom << "/" << u.surface << "\nMachines:\n";
-        for (const auto& machine : u.machines) {
-            out << machine << "\n";
-        }
-        return out;
-    }
-};
 
 auto main(int argc, char** argv)-> int{
   

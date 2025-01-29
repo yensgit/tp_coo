@@ -384,6 +384,7 @@ public:
 
 ////////classe Local////////
 class Local {
+protected:
     std::unique_ptr<Ville> ville;
     string nom;
     int surface;
@@ -407,75 +408,13 @@ public:
         surface = j["surface"];
     }
 
+    // Getters pour accéder aux membres privés
+    string getNom() const { return nom; }
+    const Ville& getVille() const { return *ville; }
+    int getSurface() const { return surface; }
+
     friend std::ostream &operator<<(std::ostream &out, const Local &l) {
         return out << *l.ville << "/" << l.nom << "/" << l.surface;
-    }
-};
-
-////////classe Objet////////
-class Objet {
-    string nom;
-    int prix;
-
-public:
-    //Constructeur avec attributs
-    Objet(string n, int p) : nom{n}, prix{p} {}
-
-    friend std::ostream &operator<<(std::ostream &out, const Objet &ob) {
-        return out << ob.nom << "/" << ob.prix;
-    }
-
-    //Constructeur avec json data
-    Objet(json d) : nom{d["nom"]}, prix{d["prix"]} {}
-
-    //Constructeur avec int id
-    Objet(int id) {
-        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/objet/" + to_string(id) + "/"});
-        json j = json::parse(r.text);
-        nom = j["nom"];
-        prix = j["prix"];
-    }
-};
-
-////////classe Ressource////////
-class Ressource {
-    std::unique_ptr<Objet> objet;
-
-public:
-    //Constructeur avec attributs
-    Ressource(int o) : objet{std::make_unique<Objet>(o)} {}
-
-    friend std::ostream &operator<<(std::ostream &out, const Ressource &r) {
-        return out << *r.objet;
-    }
-
-    //Constructeur avec json data
-    Ressource(nlohmann::json d1, nlohmann::json d2) : objet(std::make_unique<Objet>(d1["objet"]["nom"], d2["objet"]["prix"])) {}
-};
-
-////////classe QuantiteRessource////////
-class QuantiteRessource {
-    std::unique_ptr<Ressource> ressource;
-    int quantite;
-
-public:
-    //Constructeur avec attributs
-    QuantiteRessource(int r, int q) : ressource{std::make_unique<Ressource>(r)}, quantite{q} {}
-
-    friend std::ostream &operator<<(std::ostream &out, const QuantiteRessource &qr) {
-        return out << *qr.ressource << "/" << qr.quantite;
-    }
-
-    //Constructeur avec json data
-    QuantiteRessource(json d) : ressource(std::make_unique<Ressource>(d["ressource"]["nom"], d["ressource"]["prix"])),
-                                quantite{d["quantite"]} {}
-
-    //Constructeur avec int id
-    QuantiteRessource(int id) {
-        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/" + to_string(id) + "/"});
-        json j = json::parse(r.text);
-        ressource = make_unique<Ressource>(j["ressource"]);
-        quantite = j["quantite"];
     }
 };
 
@@ -510,11 +449,11 @@ public:
 class Usine : public Local {
 private:
     std::vector<std::unique_ptr<Machine>> machine;
-    
+
 public:
     // Constructeur avec JSON
     Usine(std::string nom_, json ville_, int surface_, json machine_)
-        : Local(ville_) {  // Correction de l'appel à Local
+        : Local(ville_) {  // Initialisation de Local avec les données de la ville
         for (const auto& mach : machine_) {
             machine.push_back(std::make_unique<Machine>(mach));
         }
@@ -532,7 +471,7 @@ public:
     }
 
     // Constructeur avec JSON pour Usine
-    Usine(json data) : Local(data) {  // Correction pour initialiser Local avec data
+    Usine(json data) : Local(data) {  // Initialisation de Local avec les données JSON
         for (const auto& mach : data["machines"]) {
             machine.push_back(std::make_unique<Machine>(mach));
         }
@@ -559,9 +498,6 @@ public:
         }
     }
 };
-
-
-
 
 auto main(int argc, char **argv) -> int {
 

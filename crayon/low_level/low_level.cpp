@@ -81,7 +81,7 @@ class Usine : public Local {
  public:
   vector<shared_ptr<Machine>> Machines;
 
-  Usine(string nom, shared_ptr<Ville> v, int surface)
+  Usine(string nom,make_unique<Ville> (v), int surface)
       : Local(nom, std::move(v), surface) {}
 
   void add_machine(shared_ptr<Machine> machine) { Machines.push_back(machine); }

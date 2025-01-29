@@ -241,8 +241,8 @@ const auto m1= Machine{j3["nom"], j3["n_serie"], j3["prix"]};
   std::cout << "machine 2: " << m2 << std::endl; 
  /////////////////////////AFFICHAGE USINE///////////////////////////////
 
-const auto u= Usine{j4["local"], j4["machines"]};
-   std::cout<<"usine :"<< u<< std::endl;
+    const auto u = Usine{j4};
+    std::cout << "Usine : " << u << std::endl;
      /////////////////////////AFFICHAGE QUANTITE RESSOURCE///////////////////////////////
   
 const auto qr= QuantiteRessource{j5["ressource"], j5["quantite"]};

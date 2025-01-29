@@ -114,84 +114,62 @@ public:
 
 
 
-auto main(int argc, char** argv)-> int{
+auto main(int argc, char** argv)->  {
   
   ///////////////////////////VILLE//////////////////////////////////////////////
-   cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/1/"});
-  
-    r.status_code;                  // 200
-    r.header["content-type"];       // application/json; charset=utf-8
-    r.text;                         // JSON text string
-                         // JSON text string
-  std::cout<< r.text<< std::endl;
+  cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/1/"});
   json j = json::parse(r.text);
-  
-    //////////////////////////OBJET//////////////////////////////////////////////
- cpr::Response r1 = cpr::Get(cpr::Url{"http://127.0.0.1:8000/objet/1/"});
-  r1.status_code;                  // 200
-    r1.header["content-type"];       // application/json; charset=utf-8
-    r1.text;  
-   std::cout<< r1.text<< std::endl;
+  std::cout << "Ville JSON: " << j << std::endl;
+
+  const auto v = Ville{j["nom"], j["code postal"], j["prix m2"]};
+  std::cout << "Ville : " << v << std::endl;
+
+  const auto v1 = Ville{j};
+  std::cout << "Ville 1 : " << v1 << std::endl;
+
+  const auto v2 = Ville{2};
+  std::cout << "Ville 2 : " << v2 << std::endl; 
+
+  //////////////////////////OBJET//////////////////////////////////////////////
+  cpr::Response r1 = cpr::Get(cpr::Url{"http://127.0.0.1:8000/objet/1/"});
   json j1 = json::parse(r1.text);
-  
-  //////////////////////////LOCAUX//////////////////////////////////////////////
-  cpr::Response r2= cpr::Get(cpr::Url{"http://127.0.0.1:8000/locaux/1/"});
-  r2.status_code;                  // 200
-    r2.header["content-type"];       // application/json; charset=utf-8
-    r2.text;  
-   std::cout<< r2.text<< std::endl;
-  json j2 = json::parse(r2.text);
+  std::cout << "Objet JSON: " << j1 << std::endl;
 
-    /////////////////////////MACHINE///////////////////////////////////////////// 
+  const auto ob = Objet{j1["nom"], j1["prix"]};
+  std::cout << "Objet : " << ob << std::endl;
 
-  cpr::Response r3= cpr::Get(cpr::Url{"http://127.0.0.1:8000/machine/1/"});
-  r3.status_code;                  // 200
-    r3.header["content-type"];       // application/json; charset=utf-8
-    r3.text;  
-   std::cout<< r3.text<< std::endl;
-  json j3 = json::parse(r3.text);
-  
-    /////////////////////////USINE///////////////////////////////////////////// 
-  
-  cpr::Response r4= cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/1/"});
-  r4.status_code;                  // 200
-    r4.header["content-type"];       // application/json; charset=utf-8
-    r4.text;  
-   std::cout<< r4.text<< std::endl;
-  json j4 = json::parse(r4.text);
-
-   /////////////////////////AFFICHAGE VILLE///////////////////////////////
-  //Pour le constructeur avec attributs
-  const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
-  std::cout<<"ville :"<< v<< std::endl;
-
-  //Pour le constructeur json data
-  const auto v1= Ville{j};
-   std::cout<<"ville 1 :"<< v1<< std::endl;
-
-  //Pour le construteur int id
-   const auto v2 = Ville{2};
-  std::cout << "ville 2 : " << v2 << std::endl; 
- /////////////////////////AFFICHAGE OBJET///////////////////////////////  
-  //Pour le constructeur avec attributs
-  const auto ob= Objet{j1["nom"], j1["prix"]};
-  std::cout<<"objet :"<< ob<< std::endl;
-  
   const auto ob1 = Objet{2};
-  std::cout << "objet: " << ob1 << std::endl; 
-   /////////////////////////AFFICHAGE LOCAUX///////////////////////////////
-  
-const auto l= Local{j2["ville"], j2["nom"], j2["surface"]};
-  std::cout<<"local :"<< l<< std::endl;
-   /////////////////////////AFFICHAGE MACHINE///////////////////////////////
-const auto m1= Machine{j3["nom"], j3["n_serie"], j3["prix"]};
-  std::cout<<"machine 1 :"<< m1<< std::endl;
+  std::cout << "Objet 2 : " << ob1 << std::endl; 
+
+  //////////////////////////LOCAUX//////////////////////////////////////////////
+  cpr::Response r2 = cpr::Get(cpr::Url{"http://127.0.0.1:8000/locaux/1/"});
+  json j2 = json::parse(r2.text);
+  std::cout << "Local JSON: " << j2 << std::endl;
+
+  const auto l = Local{j2["ville"], j2["nom"], j2["surface"]};
+  std::cout << "Local : " << l << std::endl;
+
+  //////////////////////////MACHINE/////////////////////////////////////////////
+  cpr::Response r3 = cpr::Get(cpr::Url{"http://127.0.0.1:8000/machine/1/"});
+  json j3 = json::parse(r3.text);
+  std::cout << "Machine JSON: " << j3 << std::endl;
+
+  const auto m1 = Machine{j3["nom"], j3["n_serie"], j3["prix"]};
+  std::cout << "Machine 1 : " << m1 << std::endl;
 
   const auto m2 = Machine{2};
-  std::cout << "machine 2: " << m2 << std::endl; 
- /////////////////////////AFFICHAGE USINE///////////////////////////////
-  const auto u= Usine{j4["local"]};
-  std::cout<<"u  :"<< u<< std::endl;
+  std::cout << "Machine 2 : " << m2 << std::endl; 
+
+  //////////////////////////USINE/////////////////////////////////////////////
+  cpr::Response r4 = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/1/"});
+  json j4 = json::parse(r4.text);
+  std::cout << "Usine JSON: " << j4 << std::endl;
+
+  const auto u = Usine{j4};
+  std::cout << "Usine : " << u << std::endl;
+
+  const auto u1 = Usine{1}; 
+  std::cout << "Usine 1 : " << u1 << std::endl;
 
   return 0;
 }

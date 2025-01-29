@@ -153,7 +153,7 @@ std::unique_ptr<Local> local;
 std::vector<std::unique_ptr<Machine>> machines;
 
 public:
-Usine (int l, int m): local{std::make_unique<Local>(l)}, machines{std::vector<std::make_unique<Local>>(m)} {}
+Usine (int l, int m): local{std::make_unique<Local>(l)}, machines{std::make_unique<Local>(m)} {}
 friend std::ostream& operator<<(
   std::ostream& out, const Usine& u) {
   return out<<*u.local<<"/"<<*u.machines;

@@ -92,6 +92,7 @@ QuantiteRessource(int id) {
         ressource = make_unique<Ressource>(j["ressource"]);  
         quantite = j["quantite"];
     }
+};
 
 
 class Machine{

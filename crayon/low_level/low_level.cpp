@@ -62,6 +62,35 @@ json j = json::parse(r.text);
 nom = j["nom"]; prix = j["prix"]; }
 };
 
+class Ressource : public Objet {
+ public:
+  string Nom;
+  int Prix;
+
+  Ressource(string nom, int prix) : Objet(nom, prix) {}
+
+  json to_json() const { return {{"nom", Nom}, {"prix", Prix}}; }
+};
+
+class QuantiteRessource{
+std::unique_ptr<Ressource> ressource;
+    int quantite;
+public:
+QuantiteRessource (int r, int q): ressource{std::make_unique<Ressource>(r)}, quantite{q} {}
+friend std::ostream& operator<<(
+  std::ostream& out, const QuantiteRessource& qr) {
+  return out<<*qr.nom<<"/"<<qr.quantite;
+  }
+QuantiteRessource(json d): ressource(std::make_unique<Ressource>(d["ressource"]["nom"], d["ressource"]["prix"])),
+          quantite{d["quantite"]} {}
+QuantiteRessource(int id) {
+        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/" + to_string(id) + "/"});
+        json j = json::parse(r.text);
+        ressource = make_unique<Ressource>(j["ressource"]);  
+        quantite = j["quantite"];
+    }
+
+
 class Machine{
 string nom;
 int n_serie;
@@ -120,7 +149,15 @@ auto main(int argc, char** argv)-> int{
   json j3 = json::parse(r3.text);
   
     /////////////////////////USINE///////////////////////////////////////////// 
+  
+    /////////////////////////QUANTITE RESSOURCE///////////////////////////////////////////// 
 
+  cpr::Response r5= cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/1/"});
+  r5.status_code;                  // 200
+    r5.header["content-type"];       // application/json; charset=utf-8
+    r5.text;  
+   std::cout<< r5.text<< std::endl;
+  json j5 = json::parse(r5.text);
 
 
    /////////////////////////AFFICHAGE VILLE///////////////////////////////
@@ -153,7 +190,11 @@ const auto m1= Machine{j3["nom"], j3["n_serie"], j3["prix"]};
   const auto m2 = Machine{2};
   std::cout << "machine 2: " << m2 << std::endl; 
  /////////////////////////AFFICHAGE USINE///////////////////////////////
- 
+
+     /////////////////////////AFFICHAGE QUANTITE RESSOURCE///////////////////////////////
+  
+const auto qr= QuantiteRessource{j5["ressource"], j5["quantite"]};
+  std::cout<<"quantite ressource :"<< qr<< std::endl;
 
   return 0;
 }

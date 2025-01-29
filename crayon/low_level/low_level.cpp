@@ -138,35 +138,41 @@ nom = j["nom"]; n_serie = j["n_serie"]; prix = j["prix"]; }
 };
 
 ////////classe Usine////////
-class Usine{
-std::unique_ptr<Local> local;
-std::vector<std::unique_ptr<Machine>> machines;
+class Usine {
+    std::unique_ptr<Local> local;
+    std::vector<std::unique_ptr<Machine>> machines;
 
 public:
-Usine (int l, int m): local{std::make_unique<Local>(l)}, machines{std::make_unique<Local>(m)} {}
-friend std::ostream& operator<<(
-  std::ostream& out, const Usine& u) {
-  return out<<*u.local<<"/"<<*u.machines;
-  }
-Usine(json d) : local(d["ville"]["nom"], d["ville"]["code_postal"], d["ville"]["prix m2"]), machines{} {
-    if (d["machines"].is_array()) {
-        for (const auto& machine_data : d["machines"]) {
+    Usine(int l, int m) : local{std::make_unique<Local>(l)}, machines(m) {}
+
+    friend std::ostream& operator<<(std::ostream& out, const Usine& u) {
+        out << *u.local << "/";
+        for (const auto& machine : u.machines) {
+            out << *machine << " ";
+        }
+        return out;
+    }
+
+    Usine(json d) : local(std::make_unique<Local>(d["ville"]["nom"], d["ville"]["code_postal"], d["ville"]["prix m2"])), machines{} {
+        if (d["machines"].is_array()) {
+            for (const auto& machine_data : d["machines"]) {
+                machines.push_back(std::make_unique<Machine>(machine_data));
+            }
+        } else {
+            machines.push_back(std::make_unique<Machine>(d["machines"]));
+        }
+    }
+
+    Usine(int id) {
+        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/" + std::to_string(id) + "/"});
+        json j = json::parse(r.text);
+        local = std::make_unique<Local>(j["local"]);  
+        for (const auto& machine_data : j["machines"]) {
             machines.push_back(std::make_unique<Machine>(machine_data));
         }
-    } else {
-        machines.push_back(std::make_unique<Machine>(d["machines"]));
-    }
-}
-
-Usine(int id) {
-        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/" + to_string(id) + "/"});
-        json j = json::parse(r.text);
-        local = make_unique<Local>(j["local"]);  
-       for (const auto& machine_data : j["machines"]) {
-    machines.push_back(std::make_unique<Machine>(machine_data));
-}
     }
 };
+
 /*class Usine : public Local {
     std::vector<std::unique_ptr<Machine>> machines;
 

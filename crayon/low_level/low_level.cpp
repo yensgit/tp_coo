@@ -508,61 +508,67 @@ public:
 
 ////////classe Usine////////
 class Usine : public Local {
-  private:
+private:
     std::vector<std::unique_ptr<Machine>> machine;
+    // stock : soit définir une classe Stock ou l'enlever si non nécessaire
+    std::vector<std::unique_ptr<Stock>> stock;  // Ajout de stock pour éviter l'erreur
     
-  public:
-    Usine(string nom_, json ville_, int surface_, json machine_, json stock_)
-        : Local(nom_, ville_, surface_) {
-        for (const auto& mach : machine_){
-          machine.push_back(std::make_unique<Machine>(mach));
+public:
+    // Constructeur avec JSON
+    Usine(std::string nom_, json ville_, int surface_, json machine_, json stock_)
+        : Local(ville_, nom_, surface_) {  // Correction de l'appel à Local
+        for (const auto& mach : machine_) {
+            machine.push_back(std::make_unique<Machine>(mach));
         }
-        for (const auto& stk : stock_){
-          stock.push_back(std::make_unique<Stock>(stk));
+        for (const auto& stk : stock_) {
+            stock.push_back(std::make_unique<Stock>(stk));  // Assurez-vous que Stock est bien défini
         }
     }
 
+    // Correction de l'operator<<
     friend std::ostream& operator<<(std::ostream& out, const Usine& usine_) {
-      out << usine_.nom << " ; Ville: " << *usine_.ville
-                << " ; Surface: " << usine_.surface;
-      out << "; Machines:";
-      for (const auto& mach : usine_.machine){
-          out << " - " << *mach;
-      }
-     
-      }
-      return out;
+        out << usine_.nom << " ; Ville: " << *usine_.ville 
+            << " ; Surface: " << usine_.surface;
+        out << " ; Machines:";
+        for (const auto& mach : usine_.machine) {
+            out << " - " << *mach;
+        }
+        out << " ; Stock:";
+        for (const auto& stk : usine_.stock) {
+            out << " - " << *stk;  // Assurez-vous que Stock a un opérateur<< valide
+        }
+        return out;  // Ajout du return
     }
 
-    Usine(json data) : Local(data) {
-      for (const auto& mach : data["machines"]){
-        machine.push_back(std::make_unique<Machine>(mach));
-      }
-     
+    // Constructeur avec JSON pour Usine
+    Usine(json data) : Local(data["ville"]) {  // Correction pour initiliser Local avec data
+        for (const auto& mach : data["machines"]) {
+            machine.push_back(std::make_unique<Machine>(mach));
+        }
     }
 
-    static void affichage(){
-      unsigned int essai = 0;
-      while(true){
-        static unsigned int id = 1;
-        string url_Usine = "http://localhost:8000/usine/api/"+to_string(id);
-        auto response = cpr::Get(cpr::Url{url_Usine});
-        if (response.status_code != 200) {
-          essai++;
+    // Fonction affichage
+    static void affichage() {
+        unsigned int essai = 0;
+        while (true) {
+            static unsigned int id = 1;
+            string url_Usine = "http://localhost:8000/usine/api/" + to_string(id);
+            auto response = cpr::Get(cpr::Url{url_Usine});
+            if (response.status_code != 200) {
+                essai++;
+            } else {
+                const auto Usine_ = Usine(json::parse(cpr::Get(cpr::Url{url_Usine}).text));
+                std::cout << "Usine: " << Usine_ << "\n" << std::endl;
+                essai = 0;
+            }
+            if (essai == 5) {
+                break;
+            }
+            id++;
         }
-        else {
-          const auto Usine_ = Usine(
-              json::parse(cpr::Get(cpr::Url{url_Usine}).text));
-          std::cout << "Usine: " << Usine_ << "\n" << std::endl;
-          essai=0;
-        }
-        if(essai==5){
-          break;
-        }
-        id++;
-      }
     }
 };
+
 
 auto main(int argc, char **argv) -> int {
 

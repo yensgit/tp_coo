@@ -148,7 +148,7 @@ friend std::ostream& operator<<(
   std::ostream& out, const Usine& u) {
   return out<<*u.local<<"/"<<*u.machines;
   }
-Usine(json d) : Local(d["ville"]["nom"], d["ville"]["code_postal"], d["ville"]["prix m2"]), machines{} {
+Usine(json d) : local(d["ville"]["nom"], d["ville"]["code_postal"], d["ville"]["prix m2"]), machines{} {
     if (d["machines"].is_array()) {
         for (const auto& machine_data : d["machines"]) {
             machines.push_back(std::make_unique<Machine>(machine_data));

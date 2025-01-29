@@ -529,9 +529,7 @@ class Usine : public Local {
       for (const auto& mach : usine_.machine){
           out << " - " << *mach;
       }
-      out << " ; Stocks:";
-      for (const auto& stk : usine_.stock){
-          out << " - " << *stk;
+     
       }
       return out;
     }

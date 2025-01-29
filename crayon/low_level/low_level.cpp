@@ -82,7 +82,7 @@ public:
 QuantiteRessource (int r, int q): ressource{std::make_unique<Ressource>(r)}, quantite{q} {}
 friend std::ostream& operator<<(
   std::ostream& out, const QuantiteRessource& qr) {
-  return out<<*qr.nom<<"/"<<qr.quantite;
+  return out<<*qr.ressource<<"/"<<qr.quantite;
   }
 QuantiteRessource(json d): ressource(std::make_unique<Ressource>(d["ressource"]["nom"], d["ressource"]["prix"])),
           quantite{d["quantite"]} {}

@@ -71,7 +71,8 @@ friend std::ostream& operator<<(
   std::ostream& out, const Ressource& r) {
   return out<<*r.objet;
   }
-Ressource(json d): objet(std::make_unique<Objet>(d["objet"]["nom"], d["objet"]["prix"])) {}
+Ressource(nlohmann::json d1, nlohmann::json d2) : objet(std::make_unique<Objet>(d1["objet"]["nom"], d2["objet"]["prix"])) {}
+
 
 };
 

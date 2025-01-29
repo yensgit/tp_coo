@@ -164,7 +164,7 @@ Usine(int id) {
         cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/" + to_string(id) + "/"});
         json j = json::parse(r.text);
         local = make_unique<Local>(j["local"]);  
-        machines = make_unique<Local>(j["local"]);
+        machines = make_unique<Machine>(j["machines"]);
     }
 };
 

@@ -194,7 +194,7 @@ const auto m1= Machine{j3["nom"], j3["n_serie"], j3["prix"]};
   const auto u1 = Usine{1}; 
   std::cout << "Usine 1 : " << u1 << std::endl;
 
-  return 0;
+ 
 
   return 0;
 }

@@ -92,7 +92,17 @@ class Usine : public Local {
     for (const auto& machine : Machines) {
       total_cost += machine->cost();
     }
-    return total_cost;
+    return total_cost /*  Parsing Usine */
+  cpr::Response r3 = cpr::Get(
+      cpr::Url{"http://localhost:8000/usine/1"});  // Récupération des données
+  cout << endl << r3.status_code << endl;
+  cout << r3.header["content-type"] << endl;
+  cout << endl << r3.text << endl;
+
+  cout << endl << "Parser le texte" << endl;
+  json data3 = json::parse(r3.text);
+  cout << data3 << endl;
+;
   }
 
   json to_json() const {
@@ -145,13 +155,17 @@ auto main(int argc, char** argv)-> int{
   json j3 = json::parse(r3.text);
   
     /////////////////////////USINE///////////////////////////////////////////// 
-  
-  cpr::Response r4= cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/1/"});
-  r4.status_code;                  // 200
-    r4.header["content-type"];       // application/json; charset=utf-8
-    r4.text;  
-   std::cout<< r4.text<< std::endl;
-  json j4 = json::parse(r4.text);
+ /*  Parsing Usine */
+  cpr::Response r4 = cpr::Get(
+      cpr::Url{"http://localhost:8000/usine/1"});  // Récupération des données
+  cout << endl << r4.status_code << endl;
+  cout << r4.header["content-type"] << endl;
+  cout << endl << r4.text << endl;
+
+  cout << endl << "Parser le texte" << endl;
+  json data4 = json::parse(r4.text);
+  cout << data4 << endl;
+
 
    /////////////////////////AFFICHAGE VILLE///////////////////////////////
   //Pour le constructeur avec attributs

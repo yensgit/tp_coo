@@ -121,9 +121,7 @@ public:
     Usine(int v, string n, int s) : Local(v, n, s) {}
 
     Usine(json d) : Local(d["ville"]["nom"], d["ville"]["code_postal"], d["ville"]["prix m2"]), machines{} {
-       if (d.contains("machines") && d["machines"].is_array()) {
-    for (const auto& machine_data : d["machines"]) {
-{
+       for (const auto& machine_data : d["machines"]) {
             machines.push_back(std::make_unique<Machine>(machine_data));
         }
     }
@@ -194,7 +192,7 @@ auto main(int argc, char** argv)-> int{
     r4.text;  
    std::cout<< r4.text<< std::endl;
   json j4= json::parse(r4.text);
-    std::cout << j4.dump(4) << std::endl;
+    
     /////////////////////////QUANTITE RESSOURCE///////////////////////////////////////////// 
 
   cpr::Response r5= cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/1/"});

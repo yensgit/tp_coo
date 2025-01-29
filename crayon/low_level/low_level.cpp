@@ -153,11 +153,7 @@ const auto m1= Machine{j3["nom"], j3["n_serie"], j3["prix"]};
   const auto m2 = Machine{2};
   std::cout << "machine 2: " << m2 << std::endl; 
  /////////////////////////AFFICHAGE USINE///////////////////////////////
- cpr::Response r4 = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/1/"});
-    cout << r4.status_code << " " << r4.header["content-type"] << endl;
-    json j4 = json::parse(r4.text);
-    const auto u = Usine{j4};
-    cout << "usine : " << u << endl;
+ 
 
   return 0;
 }

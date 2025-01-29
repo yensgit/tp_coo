@@ -78,41 +78,33 @@ nom = j["nom"]; n_serie = j["n_serie"]; prix = j["prix"]; }
 };
 
 
-class Usine {
-    std::unique_ptr<Local> local;
-    std::vector<std::unique_ptr<Machine>> machines;
+class Usine : public Local {
+ public:
+  vector<shared_ptr<Machine>> Machines;
 
-public:
-    Usine(int local_id, const std::vector<int>& machine_ids) 
-        : local{std::make_unique<Local>(local_id)} {
-        for (int id : machine_ids) {
-            machines.push_back(std::make_unique<Machine>(id));
-        }
-    }
+  Usine(string nom, shared_ptr<Ville> v, int surface)
+      : Local(nom, std::move(v), surface) {}
 
-    Usine(json d)
-        : local{std::make_unique<Local>(d["local"])} {
-        for (const auto& m : d["machines"]) {
-            machines.push_back(std::make_unique<Machine>(m));
-        }
-    }
+  void add_machine(shared_ptr<Machine> machine) { Machines.push_back(machine); }
 
-    Usine(int id) {
-        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/" + std::to_string(id) + "/"});
-        json j = json::parse(r.text);
-        local = std::make_unique<Local>(j["local"]);
-        for (const auto& m : j["machines"]) {
-            machines.push_back(std::make_unique<Machine>(m));
-        }
+  int cost() const override {
+    int total_cost = ville->Prix_m2 * surface;
+    for (const auto& machine : Machines) {
+      total_cost += machine->cost();
     }
+    return total_cost;
+  }
 
-    friend std::ostream& operator<<(std::ostream& out, const Usine& u) {
-        out << "Usine: " << *u.local << "\nMachines: ";
-        for (const auto& machine : u.machines) {
-            out << "\n  - " << *machine;
-        }
-        return out;
+  json to_json() const {
+    json machines_json = json::array();
+    for (const auto& machine : Machines) {
+      machines_json.push_back(machine->to_json());
     }
+    return {{"nom", nom},
+            {"ville", ville->to_json()},
+            {"surface", surface},
+            {"machines", machines_json}};
+  }
 };
 
 auto main(int argc, char** argv)-> int{

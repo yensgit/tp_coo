@@ -114,7 +114,38 @@ nom = j["nom"]; n_serie = j["n_serie"]; prix = j["prix"]; }
 };
 
 
+class Usine : public Local {
+    std::vector<std::unique_ptr<Machine>> machines;
 
+public:
+    Usine(int v, string n, int s) : Local(v, n, s) {}
+
+    Usine(json d) : Local(d["ville"]["nom"], d["ville"]["code_postal"], d["ville"]["prix m2"]), machines{} {
+        for (const auto& machine_data : d["machines"]) {
+            machines.push_back(std::make_unique<Machine>(machine_data));
+        }
+    }
+
+    Usine(int id) : Local(id) {
+        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usines/" + to_string(id) + "/"});
+        json j = json::parse(r.text);
+        for (const auto& machine_data : j["machines"]) {
+            machines.push_back(std::make_unique<Machine>(machine_data));
+        }
+    }
+
+    void add_machine(int machine_id) {
+        machines.push_back(std::make_unique<Machine>(machine_id));
+    }
+
+    friend ostream& operator<<(ostream& out, const Usine& u) {
+        out << static_cast<const Local&>(u) << " | Machines: ";
+        for (const auto& machine : u.machines) {
+            out << *machine << " ";
+        }
+        return out;
+    }
+};
 
 auto main(int argc, char** argv)-> int{
   

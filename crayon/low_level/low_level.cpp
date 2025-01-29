@@ -119,8 +119,8 @@ class Usine : public Local {
 
 public:
     Usine(int v, string n, int s) : Local(v, n, s) {}
-
-    Usine(json d) : Local(d["ville"]["nom"], d["ville"]["code_postal"], d["ville"]["prix m2"]), machines{} {
+Usine(json d) : Local(d["ville"]), machines{}{
+   // Usine(json d) : Local(d["ville"]["nom"], d["ville"]["code_postal"], d["ville"]["prix m2"]), machines{} {
        for (const auto& machine_data : d["machines"]) {
             machines.push_back(std::make_unique<Machine>(machine_data));
         }
@@ -139,7 +139,9 @@ public:
     }
 
     friend ostream& operator<<(ostream& out, const Usine& u) {
-        out << static_cast<const Local&>(u) << " | Machines: ";
+        //out << static_cast<const Local&>(u) << " | Machines: ";
+      out << "Usine: " << static_cast<const Local&>(u) << "\n";
+
         for (const auto& machine : u.machines) {
             out << *machine << " ";
         }

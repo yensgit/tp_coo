@@ -164,6 +164,13 @@ auto main(int argc, char** argv)-> int{
    std::cout<< r5.text<< std::endl;
   json j5 = json::parse(r5.text);
 
+    cpr::Response r6= cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/2/"});
+  r6.status_code;                  // 200
+    r6.header["content-type"];       // application/json; charset=utf-8
+    r6.text;  
+   std::cout<< r6.text<< std::endl;
+  json j6 = json::parse(r6.text);
+
 
    /////////////////////////AFFICHAGE VILLE///////////////////////////////
   //Pour le constructeur avec attributs
@@ -200,6 +207,9 @@ const auto m1= Machine{j3["nom"], j3["n_serie"], j3["prix"]};
   
 const auto qr= QuantiteRessource{j5["ressource"], j5["quantite"]};
   std::cout<<"quantite ressource :"<< qr<< std::endl;
+
+const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
+  std::cout<<"quantite ressource :"<< qr2<< std::endl;
 
   return 0;
 }

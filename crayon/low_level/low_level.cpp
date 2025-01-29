@@ -158,8 +158,16 @@ friend std::ostream& operator<<(
   std::ostream& out, const Usine& u) {
   return out<<*u.local<<"/"<<*u.machines;
   }
-Usine(json d): local(std::make_unique<Local>(d["local"]["ville"],d["local"]["nom"], d["local"]["surface"])),
-          machines(d["machines"]["nom"],d["machines"]["n_serie"], d["machines"]["prix"]) {}
+Usine(json d) : Local(d["ville"]["nom"], d["ville"]["code_postal"], d["ville"]["prix m2"]), machines{} {
+    if (d["machines"].is_array()) {
+        for (const auto& machine_data : d["machines"]) {
+            machines.push_back(std::make_unique<Machine>(machine_data));
+        }
+    } else {
+        machines.push_back(std::make_unique<Machine>(d["machines"]));
+    }
+}
+
 Usine(int id) {
         cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/" + to_string(id) + "/"});
         json j = json::parse(r.text);

@@ -311,11 +311,10 @@ const auto qr= QuantiteRessource{j5["ressource"], j5["quantite"]};
 const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
   std::cout<<"quantite ressource :"<< qr2<< std::endl;
   
-/*/////////////////////////AFFICHAGE USINE///////////////////////////////
+/////////////////////////AFFICHAGE USINE///////////////////////////////
 //Affichage avec attributs
     const auto u= Usine{j4["local"], j4["machines"]};
-    std::cout << "Usine : " << u << std::endl;*/
-     Usine U(1);
-    U.afficher();
+    std::cout << "Usine : " << u << std::endl;
+   
   return 0;
 }

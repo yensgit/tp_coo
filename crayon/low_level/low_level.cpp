@@ -62,14 +62,17 @@ json j = json::parse(r.text);
 nom = j["nom"]; prix = j["prix"]; }
 };
 
-class Ressource : public Objet {
+class Ressource{
+std::unique_ptr<Objet> objet;
+
  public:
-  string Nom;
-  int Prix;
+Ressource (int o): ressource{std::make_unique<Objet>(o)} {}
+friend std::ostream& operator<<(
+  std::ostream& out, const Ressource& r) {
+  return out<<*r.objet<<;
+  }
+Ressource(json d): objet(std::make_unique<Objet>(d["objet"]["nom"], d["objet"]["prix"])) {}
 
-  Ressource(string nom, int prix) : Objet(nom, prix) {}
-
-  json to_json() const { return {{"nom", Nom}, {"prix", Prix}}; }
 };
 
 class QuantiteRessource{

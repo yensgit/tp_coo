@@ -2,6 +2,8 @@
 #include <string>
 #include <cpr/cpr.h>
 #include <nlohmann/json.hpp>
+#include <vector>
+#include <memory>
 using namespace std;
 using json = nlohmann::json;
 
@@ -77,28 +79,47 @@ json j = json::parse(r.text);
 nom = j["nom"]; n_serie = j["n_serie"]; prix = j["prix"]; }
 };
 
+
 class Usine : public Local {
- public:
-  vector<shared_ptr<Machine>> Machines;
+    vector<Machine> machines;  // Liste des machines de l'usine
 
-  Usine(string nom,make_unique<Ville> (v), int surface)
-      : Local(nom, std::move(v), surface) {}
+public:
+    // Constructeur de l'usine avec un identifiant de ville, un nom et une surface
+    Usine(int v, string n, int s) : Local(v, n, s) {}
 
-  void add_machine(shared_ptr<Machine> machine) { Machines.push_back(machine); }
-
-
-
-  json to_json() const {
-    json machines_json = json::array();
-    for (const auto& machine : Machines) {
-      machines_json.push_back(machine->to_json());
+    // Constructeur prenant un objet JSON
+    Usine(json d) : Local(d["local"]) {
+        for (const auto& machine_data : d["machines"]) {
+            machines.push_back(Machine(machine_data));
+        }
     }
-    return {{"nom", nom},
-            {"ville", ville->to_json()},
-            {"surface", surface},
-            {"machines", machines_json}};
-  }
+
+    // Constructeur prenant un identifiant pour l'usine
+    Usine(int id) {
+        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/" + to_string(id) + "/"});
+        json j = json::parse(r.text);
+
+        // Initialisation du local
+        this->ville = std::make_unique<Ville>(j["local"]["ville"]);
+        nom = j["local"]["nom"];
+        surface = j["local"]["surface"];
+
+        // Initialisation des machines
+        for (const auto& machine_data : j["machines"]) {
+            machines.push_back(Machine(machine_data));
+        }
+    }
+
+    // Affichage des informations de l'usine
+    friend std::ostream& operator<<(std::ostream& out, const Usine& u) {
+        out << "Usine: " << *u.ville << "/" << u.nom << "/" << u.surface << "\nMachines:\n";
+        for (const auto& machine : u.machines) {
+            out << machine << "\n";
+        }
+        return out;
+    }
 };
+
 auto main(int argc, char** argv)-> int{
   
   ///////////////////////////VILLE//////////////////////////////////////////////
@@ -179,7 +200,11 @@ const auto m1= Machine{j3["nom"], j3["n_serie"], j3["prix"]};
   const auto m2 = Machine{2};
   std::cout << "machine 2: " << m2 << std::endl; 
  /////////////////////////AFFICHAGE USINE///////////////////////////////
- 
+ cpr::Response r4 = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/1/"});
+    cout << r4.status_code << " " << r4.header["content-type"] << endl;
+    json j4 = json::parse(r4.text);
+    const auto u = Usine{j4};
+    cout << "usine : " << u << endl;
 
   return 0;
 }

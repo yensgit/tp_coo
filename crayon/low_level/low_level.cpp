@@ -77,7 +77,6 @@ json j = json::parse(r.text);
 nom = j["nom"]; n_serie = j["n_serie"]; prix = j["prix"]; }
 };
 
-
 class Usine : public Local {
  public:
   vector<shared_ptr<Machine>> Machines;
@@ -87,17 +86,7 @@ class Usine : public Local {
 
   void add_machine(shared_ptr<Machine> machine) { Machines.push_back(machine); }
 
-  cpr::Response r4 = cpr::Get(
-      cpr::Url{"http://localhost:8000/usine/1"});  // Récupération des données
-  cout << endl << r4.status_code << endl;
-  cout << r4.header["content-type"] << endl;
-  cout << endl << r4.text << endl;
 
-  cout << endl << "Parser le texte" << endl;
-  json data4 = json::parse(r4.text);
-  cout << data4 << endl;
-;
-  }
 
   json to_json() const {
     json machines_json = json::array();
@@ -110,7 +99,6 @@ class Usine : public Local {
             {"machines", machines_json}};
   }
 };
-
 auto main(int argc, char** argv)-> int{
   
   ///////////////////////////VILLE//////////////////////////////////////////////

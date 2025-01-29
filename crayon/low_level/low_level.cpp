@@ -510,8 +510,7 @@ public:
 class Usine : public Local {
   private:
     std::vector<std::unique_ptr<Machine>> machine;
-    std::vector<std::unique_ptr<Stock>> stock;
-
+    
   public:
     Usine(string nom_, json ville_, int surface_, json machine_, json stock_)
         : Local(nom_, ville_, surface_) {
@@ -541,16 +540,14 @@ class Usine : public Local {
       for (const auto& mach : data["machines"]){
         machine.push_back(std::make_unique<Machine>(mach));
       }
-      for (const auto& stk : data["stock"]){
-        stock.push_back(std::make_unique<Stock>(stk));
-      }
+     
     }
 
     static void affichage(){
       unsigned int essai = 0;
       while(true){
         static unsigned int id = 1;
-        string url_Usine = "http://localhost:8000/Usine/api/"+to_string(id);
+        string url_Usine = "http://localhost:8000/usine/api/"+to_string(id);
         auto response = cpr::Get(cpr::Url{url_Usine});
         if (response.status_code != 200) {
           essai++;

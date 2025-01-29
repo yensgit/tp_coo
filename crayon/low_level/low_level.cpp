@@ -54,7 +54,7 @@ friend std::ostream& operator<<(
   return out<<ob.nom<<"/"<<ob.prix;
   }
 Objet(json d):nom{d["nom"]},prix{d["prix"]} {}
-Objet(int id) {
+Objet(int id) {main(int argc, char** argv)-> int
 cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/objet/" + to_string(id) + "/"}); 
 json j = json::parse(r.text); 
 nom = j["nom"]; prix = j["prix"]; }
@@ -113,7 +113,7 @@ public:
 };
 
 
-main(int argc, char** argv)-> int{
+auto main(int argc, char** argv)-> int{
   
   ///////////////////////////VILLE//////////////////////////////////////////////
    cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/1/"});

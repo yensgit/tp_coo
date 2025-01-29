@@ -158,13 +158,13 @@ friend std::ostream& operator<<(
   std::ostream& out, const Usine& u) {
   return out<<*u.local<<"/"<<*u.machines;
   }
-Usine(json d): local(std::make_unique<LOcal>(d["local"]["ville"],d["local"]["nom"], d["local"]["surface"])),
+Usine(json d): local(std::make_unique<Local>(d["local"]["ville"],d["local"]["nom"], d["local"]["surface"])),
           machines{d["machines"]["nom"],d["machines"]["n_serie"], d["machines"]["prix"]} {}
 Usine(int id) {
         cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/" + to_string(id) + "/"});
         json j = json::parse(r.text);
         local = make_unique<Local>(j["local"]);  
-        machines = vector<make_unique<Local>>(j["local"]);
+        machines = make_unique<Local>(j["local"]);
     }
 };
 

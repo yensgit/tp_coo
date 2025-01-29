@@ -87,21 +87,15 @@ class Usine : public Local {
 
   void add_machine(shared_ptr<Machine> machine) { Machines.push_back(machine); }
 
-  int cost() const override {
-    int total_cost = ville->Prix_m2 * surface;
-    for (const auto& machine : Machines) {
-      total_cost += machine->cost();
-    }
-    return total_cost /*  Parsing Usine */
-  cpr::Response r3 = cpr::Get(
+  cpr::Response r4 = cpr::Get(
       cpr::Url{"http://localhost:8000/usine/1"});  // Récupération des données
-  cout << endl << r3.status_code << endl;
-  cout << r3.header["content-type"] << endl;
-  cout << endl << r3.text << endl;
+  cout << endl << r4.status_code << endl;
+  cout << r4.header["content-type"] << endl;
+  cout << endl << r4.text << endl;
 
   cout << endl << "Parser le texte" << endl;
-  json data3 = json::parse(r3.text);
-  cout << data3 << endl;
+  json data4 = json::parse(r4.text);
+  cout << data4 << endl;
 ;
   }
 

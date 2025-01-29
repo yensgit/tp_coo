@@ -510,18 +510,13 @@ public:
 class Usine : public Local {
 private:
     std::vector<std::unique_ptr<Machine>> machine;
-    // stock : soit définir une classe Stock ou l'enlever si non nécessaire
-    std::vector<std::unique_ptr<Stock>> stock;  // Ajout de stock pour éviter l'erreur
     
 public:
     // Constructeur avec JSON
-    Usine(std::string nom_, json ville_, int surface_, json machine_, json stock_)
+    Usine(std::string nom_, json ville_, int surface_, json machine_)
         : Local(ville_, nom_, surface_) {  // Correction de l'appel à Local
         for (const auto& mach : machine_) {
             machine.push_back(std::make_unique<Machine>(mach));
-        }
-        for (const auto& stk : stock_) {
-            stock.push_back(std::make_unique<Stock>(stk));  // Assurez-vous que Stock est bien défini
         }
     }
 
@@ -533,15 +528,11 @@ public:
         for (const auto& mach : usine_.machine) {
             out << " - " << *mach;
         }
-        out << " ; Stock:";
-        for (const auto& stk : usine_.stock) {
-            out << " - " << *stk;  // Assurez-vous que Stock a un opérateur<< valide
-        }
         return out;  // Ajout du return
     }
 
     // Constructeur avec JSON pour Usine
-    Usine(json data) : Local(data["ville"]) {  // Correction pour initiliser Local avec data
+    Usine(json data) : Local(data["ville"]) {  // Correction pour initialiser Local avec data
         for (const auto& mach : data["machines"]) {
             machine.push_back(std::make_unique<Machine>(mach));
         }
@@ -568,6 +559,7 @@ public:
         }
     }
 };
+
 
 
 auto main(int argc, char **argv) -> int {

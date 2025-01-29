@@ -158,16 +158,7 @@ auto main(int argc, char** argv)-> int{
   json j3 = json::parse(r3.text);
   
     /////////////////////////USINE///////////////////////////////////////////// 
- /*  Parsing Usine */
-  cpr::Response r4 = cpr::Get(
-      cpr::Url{"http://localhost:8000/usine/1"});  // Récupération des données
-  cout << endl << r4.status_code << endl;
-  cout << r4.header["content-type"] << endl;
-  cout << endl << r4.text << endl;
 
-  cout << endl << "Parser le texte" << endl;
-  json data4 = json::parse(r4.text);
-  cout << data4 << endl;
 
 
    /////////////////////////AFFICHAGE VILLE///////////////////////////////

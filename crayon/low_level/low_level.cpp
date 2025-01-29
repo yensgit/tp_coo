@@ -507,41 +507,65 @@ public:
 };
 
 ////////classe Usine////////
-class Usine {
-    std::unique_ptr<Local> local;
-    std::vector<std::unique_ptr<Machine>> machines;
+class Usine : public Local {
+  private:
+    std::vector<std::unique_ptr<Machine>> machine;
+    std::vector<std::unique_ptr<Stock>> stock;
 
-public:
-    Usine(int l, int m) : local{std::make_unique<Local>(l)}, machines(m) {}
-
-    friend std::ostream &operator<<(std::ostream &out, const Usine &u) {
-        out << *u.local << "/";
-        for (const auto &machine : u.machines) {
-            out << *machine << " ";
+  public:
+    Usine(string nom_, json ville_, int surface_, json machine_, json stock_)
+        : Local(nom_, ville_, surface_) {
+        for (const auto& mach : machine_){
+          machine.push_back(std::make_unique<Machine>(mach));
         }
-        return out;
-    }
-
-    Usine(json d) : local(std::make_unique<Local>(d["ville"]["nom"], d["ville"]["code_postal"], d["ville"]["prix m2"])),
-                    machines{} {
-        if (d["machines"].is_array()) {
-            for (const auto &machine_data : d["machines"]) {
-                machines.push_back(std::make_unique<Machine>(machine_data));
-            }
-        } else {
-            machines.push_back(std::make_unique<Machine>(d["machines"]));
+        for (const auto& stk : stock_){
+          stock.push_back(std::make_unique<Stock>(stk));
         }
     }
 
-    Usine(int id) {
-        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/" + std::to_string(id) + "/"});
-        json j = json::parse(r.text);
-        local = std::make_unique<Local>(j["local"]);
-        if (j["machines"].is_array()) {
-            for (const auto &machine_data : j["machines"]) {
-                machines.push_back(std::make_unique<Machine>(machine_data));
-            }
+    friend std::ostream& operator<<(std::ostream& out, const Usine& usine_) {
+      out << usine_.nom << " ; Ville: " << *usine_.ville
+                << " ; Surface: " << usine_.surface;
+      out << "; Machines:";
+      for (const auto& mach : usine_.machine){
+          out << " - " << *mach;
+      }
+      out << " ; Stocks:";
+      for (const auto& stk : usine_.stock){
+          out << " - " << *stk;
+      }
+      return out;
+    }
+
+    Usine(json data) : Local(data) {
+      for (const auto& mach : data["machines"]){
+        machine.push_back(std::make_unique<Machine>(mach));
+      }
+      for (const auto& stk : data["stock"]){
+        stock.push_back(std::make_unique<Stock>(stk));
+      }
+    }
+
+    static void affichage(){
+      unsigned int essai = 0;
+      while(true){
+        static unsigned int id = 1;
+        string url_Usine = "http://localhost:8000/Usine/api/"+to_string(id);
+        auto response = cpr::Get(cpr::Url{url_Usine});
+        if (response.status_code != 200) {
+          essai++;
         }
+        else {
+          const auto Usine_ = Usine(
+              json::parse(cpr::Get(cpr::Url{url_Usine}).text));
+          std::cout << "Usine: " << Usine_ << "\n" << std::endl;
+          essai=0;
+        }
+        if(essai==5){
+          break;
+        }
+        id++;
+      }
     }
 };
 
@@ -604,8 +628,7 @@ auto main(int argc, char **argv) -> int {
     std::cout << "quantite ressource :" << qr << std::endl;
 
     /////////////////////////AFFICHAGE USINE///////////////////////////////
-    const auto u = Usine{j4};
-    std::cout << "Usine : " << u << std::endl;
-
+   std::cout << "\nAffichage Usine: \n"<< endl;
+  Usine::affichage();
     return 0;
 }

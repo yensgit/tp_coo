@@ -241,14 +241,8 @@ const auto m1= Machine{j3["nom"], j3["n_serie"], j3["prix"]};
   std::cout << "machine 2: " << m2 << std::endl; 
  /////////////////////////AFFICHAGE USINE///////////////////////////////
 
-const auto u= Usine{j4["local"], j4["machine"]
-  cpr::Response r5= cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/1/"});
-  r5.status_code;                  // 200
-    r5.header["content-type"];       // application/json; charset=utf-8
-    r5.text;  
-   std::cout<< r5.text<< std::endl;
-  json j5 = json::parse(r5.text);};
-  std::cout<<"usine :"<< u<< std::endl;
+const auto u= Usine{j4["local"], j4["machines"]};
+   std::cout<<"usine :"<< u<< std::endl;
      /////////////////////////AFFICHAGE QUANTITE RESSOURCE///////////////////////////////
   
 const auto qr= QuantiteRessource{j5["ressource"], j5["quantite"]};

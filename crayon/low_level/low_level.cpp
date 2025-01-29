@@ -171,7 +171,7 @@ Usine(json d) : Local(d["ville"]), machines{}{
         }
         return out;
     }
-};*/
+};
 class Usine {
     std::unique_ptr<Local> local;
     std::unique_ptr<Machine> machines;
@@ -194,6 +194,50 @@ public:
         local = std::make_unique<Local>(j["local"]);  
       machines = std::make_unique<Machine>(j["machines"]);
       
+    }
+};*/
+class Usine:public Local{
+private:
+      std::vector<std::unique_ptr<Machine>> machines;
+      std::unique_ptr<Ville> ville;
+      double surface;
+public:
+    Usine(int id) : Local("", "", 0), ville(nullptr),surface(0) {
+
+    cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/"+ std::to_string(id)});
+
+    r.status_code;
+
+    if (r.status_code != 200) {
+      std::cout<<"erreur dans l'ouverture du lien http"<<std::endl;
+      return;
+    }
+
+    r.header["content-type"];
+    r.text;
+  //  std::cout<<r.text<<std::endl;
+    json data = json::parse(r.text);
+
+
+    nom = data["nom_usine"];
+    surface = data["surface"].get<double>();
+    ville = std::make_unique<Ville>(data["ville"]["id"]);
+
+
+    for (const auto& machine_data : data["machines"]) {
+    int machine_id = machine_data["id"].get<int>();
+    machines.push_back(std::make_unique<Machine>(machine_id));
+}
+
+  }
+
+  void afficher() const override {
+        std::cout << "Usine: Nom: " << nom << ", Surface: " << surface <<", ";
+        if (ville) ville->afficher();
+        std::cout << "Machines de cette Usine:"<<std::endl;
+        for (const auto& machine : machines) {
+            machine->afficher();
+        }
     }
 };
 
@@ -306,9 +350,11 @@ const auto qr= QuantiteRessource{j5["ressource"], j5["quantite"]};
 const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
   std::cout<<"quantite ressource :"<< qr2<< std::endl;
   
-/////////////////////////AFFICHAGE USINE///////////////////////////////
+/*/////////////////////////AFFICHAGE USINE///////////////////////////////
 //Affichage avec attributs
     const auto u= Usine{j4["local"], j4["machines"]};
-    std::cout << "Usine : " << u << std::endl;
+    std::cout << "Usine : " << u << std::endl;*/
+     Usine U(1);
+    U.afficher();
   return 0;
 }

@@ -66,10 +66,10 @@ class Ressource{
 std::unique_ptr<Objet> objet;
 
  public:
-Ressource (int o): ressource{std::make_unique<Objet>(o)} {}
+Ressource (int o): objet{std::make_unique<Objet>(o)} {}
 friend std::ostream& operator<<(
   std::ostream& out, const Ressource& r) {
-  return out<<*r.objet<<;
+  return out<<*r.objet;
   }
 Ressource(json d): objet(std::make_unique<Objet>(d["objet"]["nom"], d["objet"]["prix"])) {}
 

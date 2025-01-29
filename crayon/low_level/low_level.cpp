@@ -76,22 +76,29 @@ cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/machine/" + to_string
 json j = json::parse(r.text); 
 nom = j["nom"]; n_serie = j["n_serie"]; prix = j["prix"]; }
 };
+
+
 class Usine {
     std::unique_ptr<Local> local;
     std::vector<std::unique_ptr<Machine>> machines;
 
 public:
-    Usine(int l) : local{std::make_unique<Local>(l)} {}
-    
-    Usine(const json& d)
-        : local(std::make_unique<Local>(d["local"]["ville"], d["local"]["nom"], d["local"]["surface"])) {
+    Usine(int local_id, const std::vector<int>& machine_ids) 
+        : local{std::make_unique<Local>(local_id)} {
+        for (int id : machine_ids) {
+            machines.push_back(std::make_unique<Machine>(id));
+        }
+    }
+
+    Usine(json d)
+        : local{std::make_unique<Local>(d["local"])} {
         for (const auto& m : d["machines"]) {
             machines.push_back(std::make_unique<Machine>(m));
         }
     }
-    
-    Usine(const std::string& id) {
-        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/" + id + "/"});
+
+    Usine(int id) {
+        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/usine/" + std::to_string(id) + "/"});
         json j = json::parse(r.text);
         local = std::make_unique<Local>(j["local"]);
         for (const auto& m : j["machines"]) {
@@ -99,14 +106,10 @@ public:
         }
     }
 
-    void add_machine(std::unique_ptr<Machine> machine) {
-        machines.push_back(std::move(machine));
-    }
-
     friend std::ostream& operator<<(std::ostream& out, const Usine& u) {
-        out << *u.local << " / Machines: ";
-        for (const auto& m : u.machines) {
-            out << "[" << *m << "] ";
+        out << "Usine: " << *u.local << "\nMachines: ";
+        for (const auto& machine : u.machines) {
+            out << "\n  - " << *machine;
         }
         return out;
     }

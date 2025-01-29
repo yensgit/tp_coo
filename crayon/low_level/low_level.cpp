@@ -265,7 +265,6 @@ auto main(int argc, char** argv)-> int{
    std::cout<< r6.text<< std::endl;
   json j6 = json::parse(r6.text);
 
-/*
 /////////////////////////AFFICHAGE VILLE///////////////////////////////
   //Pour le constructeur avec attributs
   const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
@@ -310,6 +309,6 @@ const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
 /////////////////////////AFFICHAGE USINE///////////////////////////////
 //Affichage avec attributs
     const auto u= Usine{j4["local"], j4["machines"]};
-    std::cout << "Usine : " << u << std::endl;*/
+    std::cout << "Usine : " << u << std::endl;
   return 0;
 }

@@ -514,7 +514,7 @@ private:
 public:
     // Constructeur avec JSON
     Usine(std::string nom_, json ville_, int surface_, json machine_)
-        : Local(ville_, nom_, surface_) {  // Correction de l'appel à Local
+        : Local(ville_) {  // Correction de l'appel à Local
         for (const auto& mach : machine_) {
             machine.push_back(std::make_unique<Machine>(mach));
         }
@@ -522,8 +522,8 @@ public:
 
     // Correction de l'operator<<
     friend std::ostream& operator<<(std::ostream& out, const Usine& usine_) {
-        out << usine_.nom << " ; Ville: " << *usine_.ville 
-            << " ; Surface: " << usine_.surface;
+        out << usine_.getNom() << " ; Ville: " << usine_.getVille()
+            << " ; Surface: " << usine_.getSurface();
         out << " ; Machines:";
         for (const auto& mach : usine_.machine) {
             out << " - " << *mach;
@@ -532,7 +532,7 @@ public:
     }
 
     // Constructeur avec JSON pour Usine
-    Usine(json data) : Local(data["ville"]) {  // Correction pour initialiser Local avec data
+    Usine(json data) : Local(data) {  // Correction pour initialiser Local avec data
         for (const auto& mach : data["machines"]) {
             machine.push_back(std::make_unique<Machine>(mach));
         }
@@ -559,6 +559,7 @@ public:
         }
     }
 };
+
 
 
 

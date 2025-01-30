@@ -17,7 +17,7 @@ public:
 Ville (string n, int cp, int p):nom{n}, code_postal{cp}, prix_m2{p} {}
 friend std::ostream& operator<<(
   std::ostream& out, const Ville& v) {
-  return out<<v.nom<<"/"<<v.code_postal<<"/"<<v.prix_m2<<" euros par m²";
+  return out<<v.nom<<"/"<<v.code_postal<<"/"<<v.prix_m2<<"euros par m²";
 }
 //Constructeur avec json data
 Ville (json d):nom{d["nom"]},code_postal{d["code postal"]},prix_m2{d["prix m2"]} {}
@@ -65,7 +65,7 @@ public:
 Objet (string n, int p):nom{n},prix{p} {}
 friend std::ostream& operator<<(
   std::ostream& out, const Objet& ob) {
-  return out<<ob.nom<<"/"<<ob.prix<<" euros";
+  return out<<ob.nom<<"/"<<ob.prix<<"euros par unité de base";
   }
 //Constructeur avec json data
 Objet(json d):nom{d["nom"]},prix{d["prix"]} {}

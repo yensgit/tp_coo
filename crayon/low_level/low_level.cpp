@@ -138,44 +138,7 @@ nom = j["nom"]; n_serie = j["n_serie"]; prix = j["prix"]; }
 };
 
 ////////classe Usine////////
-class Usine : public Local {
- public:
-  // std::vecteutr de machine qui sont des pointeurs de type Machine
-   std::vector<std::unique_ptr<Machine>> machine;
-
-  Usine(json data) {  // constructeur json
-
-    nom = data["nom"];
-    ville = ville(data["ville"]);
-    surface = data["surface"];
-    for (const auto &m : data["machines"]){
-    machine.push_back(Machine(m))}
-  }
-  Machine(string url) {  // constructeur a partir de l'url
-    json data = json::parse(cpr::Get(cpr::Url{url}).text);
-    nom = data["nom"];
-    ville = ville(data["ville"]);
-    surface = data["surface"];  
-    for (const auto &m : data["machines"]){   //pour m dans data de machine
-    machine.push_back(Machine(m));}
-  }
-
-Machine(int num) {  // constructeur a partir du numero de la villle
-    json data = json::parse(
-    cpr::Get(cpr::Url{"http://localhost:8000/ville/" + to_string(num)}).text);
-    nom = data["nom"];
-    ville = ville(data["ville"]);
-    surface = data["surface"];
-    for (const auto &m : data["machines"]){
-      machine.push_back(Machine(m));}
-  }
-
-  friend ostream& operator<<(ostream& out, const Machine& p) {
-    return out << "Machine" << p.nom << ", " << p.n_serie;
-  }
-
-};
-/*class Usine {
+class Usine {
     std::unique_ptr<Local> local;
     std::vector<std::unique_ptr<Machine>> machines;
 
@@ -209,7 +172,7 @@ public:
         }
     }
 };
-class Usine : public Local {
+/*class Usine : public Local {
     std::vector<std::unique_ptr<Machine>> machines;
 
 public:

@@ -52,7 +52,7 @@ Local(int id) {
     }
 
     friend std::ostream& operator<<(std::ostream& out, const Local& l) {
-        return out << *l.ville << "/" << l.nom << "/" << l.surface;
+        return out << *l.ville << "/" << l.nom << "/" << l.surface << " m²";
     }
 };
 
@@ -65,7 +65,7 @@ public:
 Objet (string n, int p):nom{n},prix{p} {}
 friend std::ostream& operator<<(
   std::ostream& out, const Objet& ob) {
-  return out<<ob.nom<<"/"<<ob.prix;
+  return out<<ob.nom<<"/"<<ob.prix<<" euros";
   }
 //Constructeur avec json data
 Objet(json d):nom{d["nom"]},prix{d["prix"]} {}

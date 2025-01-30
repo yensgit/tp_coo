@@ -436,10 +436,10 @@ std::cout<<"local :"<< l<< std::endl;
  /////////////////////////AFFICHAGE OBJET///////////////////////////////  
   //Affichage avec attributs
 const auto ob= Objet{j2["nom"], j2["prix"]};
-std::cout<<"objet :"<< ob<<" kg"<< std::endl;
+std::cout<<"objet :"<< ob<< std::endl;
   //Affichage avec int id
 const auto ob1 = Objet{2};
-std::cout << "objet: " << ob1 <<" m"<< std::endl; 
+std::cout << "objet: " << ob1 << std::endl; 
 
   
 /////////////////////////AFFICHAGE MACHINE///////////////////////////////

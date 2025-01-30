@@ -292,6 +292,7 @@ Stock(int id) {
 };
 auto main(int argc, char** argv)-> int{
   
+  std::cout<<"AFFICHAGE AVEC LES REQUETES HTTP EN UTILISANT CPR \n"<< << std::endl;
   ///////////////////////////VILLE//////////////////////////////////////////////
    cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/1/"});
   
@@ -415,7 +416,7 @@ auto main(int argc, char** argv)-> int{
    std::cout<< r11.text<< std::endl;
   json j11 = json::parse(r11.text);
 
-  
+  std::cout<<"\n AFFICHAGE AVEC LES CONSTRUCTEURS \n"<< << std::endl;
 /////////////////////////AFFICHAGE VILLE///////////////////////////////
   //Pour le constructeur avec attributs
 const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
@@ -464,8 +465,8 @@ const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
   std::cout << "Usine : " << u << std::endl;
   
    /////////////////////////AFFICHAGE ETAPE///////////////////////////////                             //Nous avons commenté cette partie car, à partir de quantité de ressource, nous n'arrivons plus à afficher les éléments des classes
-    //Affichage avec int id                                                                            //Usine, Etape, Produit et Stock avec les const auto. On a pu les afficher autrement avec les requêtes HTTP avec cpr comme vous pourrez
-  const auto e1 = Etape{j7["nom"], j7["resource"], j7["machine"], j7["duree"], j7["etapesuiv"]};       //le voir à la compilation mais pour les const auto, on a l'erreur suivante que nous n'avons pas réussi à débugger.
+    //Affichage avec int id                                                                            //Usine, Etape, Produit et Stock avec les const auto. On a pu les afficher autrement avec les requêtes HTTP en faisnat usage de cpr comme
+  const auto e1 = Etape{j7["nom"], j7["resource"], j7["machine"], j7["duree"], j7["etapesuiv"]};       //vous pourrez le voir à la compilation mais pour les const auto, on a l'erreur suivante que nous n'avons pas réussi à débugger.
   std::cout << "etape 1: " << e1 << std::endl;                                                         //En utilisant l'affichage avec les attributs, on a :
                                                                                                        //terminate called after throwing an instance of 'nlohmann::json_abi_v3_11_3::detail::type_error'
     //Affichage avec int id                                                                            //what():  [json.exception.type_error.302] type must be string, but is null

@@ -387,8 +387,6 @@ auto main(int argc, char** argv)-> int{
     r4.text;  
    std::cout<< r4.text<< std::endl;
   json j4= json::parse(r4.text);
-    
-
 
       /////////////////////////ETAPE///////////////////////////////////////////// 
 

@@ -227,7 +227,7 @@ auto main(int argc, char** argv)-> int{
   json j = json::parse(r.text);
   
     //////////////////////////OBJET//////////////////////////////////////////////
- cpr::Response r1 = cpr::Get(cpr::Url{"http://127.0.0.1:8000/objet/1/"});
+ cpr::Response r1 = cpr::Get(cpr::Url{"http://127.0.0.1:8000/objet/6/"});
   r1.status_code;                  // 200
     r1.header["content-type"];       // application/json; charset=utf-8
     r1.text;  
@@ -235,7 +235,7 @@ auto main(int argc, char** argv)-> int{
   json j1 = json::parse(r1.text);
   
   //////////////////////////LOCAUX//////////////////////////////////////////////
-  cpr::Response r2= cpr::Get(cpr::Url{"http://127.0.0.1:8000/locaux/1/"});
+  cpr::Response r2= cpr::Get(cpr::Url{"http://127.0.0.1:8000/locaux/4/"});
   r2.status_code;                  // 200
     r2.header["content-type"];       // application/json; charset=utf-8
     r2.text;  

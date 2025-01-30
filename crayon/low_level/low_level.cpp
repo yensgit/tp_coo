@@ -246,7 +246,7 @@ class Produit : public Objet{
 std::unique_ptr<Etape> etape;
 string nom;
 //Constructeur avec attributs
-Produit (string nom,int e): nom(nom),etape{std::make_unique<Etape>(e)}  {}
+Produit (string nom,int e): nom{nom},etape{std::make_unique<Etape>(e)}  {}
 friend std::ostream& operator<<(
   std::ostream& out, const Produit& p) {
   return out<<p.nom<<*p.etape;

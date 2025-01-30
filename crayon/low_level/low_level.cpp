@@ -265,7 +265,31 @@ Produit(int id) {
         
 
 ////////classe Stock////////
+class Stock {
 
+std::unique_ptr<Usine> usine;
+std::unique_ptr<Ressource> ressource;
+int nombre;
+
+ public:
+    // Constructeur avec attributs
+    Produit(int u, int r,int n): usine{std::make_unique<Usine>(u)}, ressource{std::make_unique<Ressource>(r)},nombre{n} {}
+friend std::ostream& operator<<(
+  std::ostream& out, const Stock& s) {
+  return out<<*s.usine<<"/"<<*s.ressource<<"/"<<s.nombre;
+  }
+//Constructeur avec json data
+Produit(json d): usine(std::make_unique<Usine>(d["usine"])),
+          ressource(std::make_unique<Ressource>(d["ressource"])) {}
+//Constructeur avec int id
+Produit(int id) {
+        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/stock/" + to_string(id) + "/"});
+        json j = json::parse(r.text);
+        usine = make_unique<Usine>(j["usine"]);  
+        ressource = make_unique<Ressource>(j["ressource"]); 
+   nombre = j["nombre"]; 
+    }
+};
 auto main(int argc, char** argv)-> int{
   
   ///////////////////////////VILLE//////////////////////////////////////////////
@@ -352,6 +376,18 @@ auto main(int argc, char** argv)-> int{
     r9.text;  
    std::cout<< r9.text<< std::endl;
   json j9= json::parse(r9.text);
+  //////////////////////////LOCAUX//////////////////////////////////////////////
+  cpr::Response r10= cpr::Get(cpr::Url{"http://127.0.0.1:8000/stock/2/"});
+  r10.status_code;                  // 200
+    r10.header["content-type"];       // application/json; charset=utf-8
+    r10.text;  
+   std::cout<< r10.text<< std::endl;
+  json j10 = json::parse(r10.text);
+
+  //Pour le constructeur json data
+  const auto s= Stock{j10};
+   std::cout<<"stock :"<< s<< std::endl;
+  
 /////////////////////////AFFICHAGE VILLE///////////////////////////////
   //Pour le constructeur avec attributs
   const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};

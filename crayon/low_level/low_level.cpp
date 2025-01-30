@@ -301,6 +301,15 @@ auto main(int argc, char** argv)-> int{
                          // JSON text string
   std::cout<< r.text<< std::endl;
   json j = json::parse(r.text);
+
+     cpr::Response r12 = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/2/"});
+  
+    r12.status_code;                  // 200
+    r12.header["content-type"];       // application/json; charset=utf-8
+    r12.text;                         // JSON text string
+                         // JSON text string
+  std::cout<< r12.text<< std::endl;
+  json j12 = json::parse(r12.text);
   
   //////////////////////////LOCAUX//////////////////////////////////////////////
   cpr::Response r1= cpr::Get(cpr::Url{"http://127.0.0.1:8000/locaux/1/"});
@@ -317,6 +326,20 @@ auto main(int argc, char** argv)-> int{
     r2.text;  
    std::cout<< r2.text<< std::endl;
   json j2 = json::parse(r2.text);
+
+   cpr::Response r13 = cpr::Get(cpr::Url{"http://127.0.0.1:8000/objet/2/"});
+  r13.status_code;                  // 200
+    r13.header["content-type"];       // application/json; charset=utf-8
+    r13.text;  
+   std::cout<< r13.text<< std::endl;
+  json j13 = json::parse(r13.text);
+  
+     cpr::Response r14 = cpr::Get(cpr::Url{"http://127.0.0.1:8000/objet/3/"});
+  r14.status_code;                  // 200
+    r14.header["content-type"];       // application/json; charset=utf-8
+    r14.text;  
+   std::cout<< r14.text<< std::endl;
+  json j14 = json::parse(r14.text);
     /////////////////////////MACHINE///////////////////////////////////////////// 
 
   cpr::Response r3= cpr::Get(cpr::Url{"http://127.0.0.1:8000/machine/1/"});

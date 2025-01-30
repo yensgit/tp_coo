@@ -376,7 +376,9 @@ auto main(int argc, char** argv)-> int{
     r9.text;  
    std::cout<< r9.text<< std::endl;
   json j9= json::parse(r9.text);
-  //////////////////////////LOCAUX//////////////////////////////////////////////
+  
+  //////////////////////////STOCK//////////////////////////////////////////////
+  
   cpr::Response r10= cpr::Get(cpr::Url{"http://127.0.0.1:8000/stock/1/"});
   r10.status_code;                  // 200
     r10.header["content-type"];       // application/json; charset=utf-8
@@ -391,74 +393,80 @@ auto main(int argc, char** argv)-> int{
    std::cout<< r11.text<< std::endl;
   json j11 = json::parse(r11.text);
 
- 
   
 /////////////////////////AFFICHAGE VILLE///////////////////////////////
   //Pour le constructeur avec attributs
-  const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
-  std::cout<<"ville :"<< v<< std::endl;
+const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
+std::cout<<"ville :"<< v<< std::endl;
 
   //Pour le constructeur json data
-  const auto v1= Ville{j};
-   std::cout<<"ville 1 :"<< v1<< std::endl;
+const auto v1= Ville{j};
+std::cout<<"ville 1 :"<< v1<< std::endl;
 
   //Pour le construteur int id
-   const auto v2 = Ville{2};
-  std::cout << "ville 2 : " << v2 << std::endl; 
+const auto v2 = Ville{2};
+std::cout << "ville 2 : " << v2 << std::endl; 
  /////////////////////////AFFICHAGE OBJET///////////////////////////////  
   //Affichage avec attributs
-  const auto ob= Objet{j1["nom"], j1["prix"]};
-  std::cout<<"objet :"<< ob<< std::endl;
+const auto ob= Objet{j1["nom"], j1["prix"]};
+std::cout<<"objet :"<< ob<< std::endl;
   //Affichage avec int id
-  const auto ob1 = Objet{2};
-  std::cout << "objet: " << ob1 << std::endl; 
+const auto ob1 = Objet{2};
+std::cout << "objet: " << ob1 << std::endl; 
 /////////////////////////AFFICHAGE LOCAUX///////////////////////////////
   //Affichage avec attributs
 const auto l= Local{j2["ville"], j2["nom"], j2["surface"]};
-  std::cout<<"local :"<< l<< std::endl;
+std::cout<<"local :"<< l<< std::endl;
+  
 /////////////////////////AFFICHAGE MACHINE///////////////////////////////
   //Affichage avec attributs
 const auto m1= Machine{j3["nom"], j3["n_serie"], j3["prix"]};
-  std::cout<<"machine 1 :"<< m1<< std::endl;
+std::cout<<"machine 1 :"<< m1<< std::endl;
 
   //Affichage avec int id
-  const auto m2 = Machine{2};
-  std::cout << "machine 2: " << m2 << std::endl; 
+const auto m2 = Machine{2};
+std::cout << "machine 2: " << m2 << std::endl; 
  
 /////////////////////////AFFICHAGE QUANTITE RESSOURCE///////////////////////////////
   //Affichage avec attributs
 const auto qr= QuantiteRessource{j5["ressource"], j5["quantite"]};
   std::cout<<"quantite ressource :"<< qr<< std::endl;
   
-//Affichage avec attributs
+  //Affichage avec attributs
 const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
   std::cout<<"quantite ressource :"<< qr2<< std::endl;
 /*/////////////////////////AFFICHAGE USINE///////////////////////////////
-  //Affichage avec int id
+    //Affichage avec int id
   const auto u = Usine{1};
   std::cout << "Usine : " << u << std::endl;
   
    /////////////////////////AFFICHAGE ETAPE///////////////////////////////                             //Nous avons commenté cette partie car, à partir de quantité de ressource, nous n'arrivons plus à afficher les éléments des classes
-//Affichage avec int id                                                                                //Usine, Etape, Produit et Stock avec les const auto. On a pu les afficher autrement avec les requêtes HTTP avec cpr comme vous pourrez
-  const auto e1 = Etape{j7["nom"], j7["resource"], j7["machine"], j7["duree"], j7["etapesuiv"]};       //le voir à la compilation mais pour les const auto on a l'erreur suivante que nous n'avons pas réussi à débugger :
+    //Affichage avec int id                                                                            //Usine, Etape, Produit et Stock avec les const auto. On a pu les afficher autrement avec les requêtes HTTP avec cpr comme vous pourrez
+  const auto e1 = Etape{j7["nom"], j7["resource"], j7["machine"], j7["duree"], j7["etapesuiv"]};       //le voir à la compilation mais pour les const auto, on a l'erreur suivante que nous n'avons pas réussi à débugger :
   std::cout << "etape 1: " << e1 << std::endl;
                                                                                                        //terminate called after throwing an instance of 'nlohmann::json_abi_v3_11_3::detail::type_error'
-  //Affichage avec int id                                                                              //what():  [json.exception.type_error.302] type must be string, but is null
+    //Affichage avec int id                                                                            //what():  [json.exception.type_error.302] type must be string, but is null
   const auto e2 = Etape{2};                                                                            //Abandon
   std::cout << "etape 2: " << e2 << std::endl;
   
   /////////////////////////AFFICHAGE PRODUIT///////////////////////////////
+    //Affichage avec attributs 
+const auto p= Produit{j9["objet"], j9["etape"]};
+  std::cout<<"produit :"<< p<< std::endl;
+  
     //Affichage avec int id
   const auto p1 = Produit{3};
   std::cout << "produit id: " << p1 << std::endl;
-  //Affichage avec attributs 
-const auto p= Produit{j9["objet"], j9["etape"]};
-  std::cout<<"produit :"<< p<< std::endl;*/
 
    /////////////////////////AFFICHAGE STOCK///////////////////////////////
     //Affichage avec int id
   const auto s1 = Stock{1};
   std::cout << "Stock 1 : " << s1 << std::endl;
+
+    //Affichage avec int id
+  const auto s2 = Stock{2};
+  std::cout << "Stock  : " << s2 << std::endl;
+  */
   
 
    

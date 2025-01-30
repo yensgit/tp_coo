@@ -292,7 +292,7 @@ Stock(int id) {
 };
 auto main(int argc, char** argv)-> int{
   
-  std::cout<<"AFFICHAGE AVEC LES REQUETES HTTP EN UTILISANT CPR \n"<< << std::endl;
+  std::cout<<"AFFICHAGE AVEC LES REQUETES HTTP EN UTILISANT CPR \n"<< std::endl;
   ///////////////////////////VILLE//////////////////////////////////////////////
    cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/1/"});
   
@@ -416,7 +416,7 @@ auto main(int argc, char** argv)-> int{
    std::cout<< r11.text<< std::endl;
   json j11 = json::parse(r11.text);
 
-  std::cout<<"\n AFFICHAGE AVEC LES CONSTRUCTEURS \n"<< << std::endl;
+  std::cout<<"\n AFFICHAGE AVEC LES CONSTRUCTEURS \n"<< std::endl;
 /////////////////////////AFFICHAGE VILLE///////////////////////////////
   //Pour le constructeur avec attributs
 const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};

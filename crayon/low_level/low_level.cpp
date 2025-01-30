@@ -126,7 +126,7 @@ public:
 Machine (string n, int ns, int p):nom{n}, n_serie{ns}, prix{p} {}
 friend std::ostream& operator<<(
   std::ostream& out, const Machine& m) {
-  return out<<m.nom<<"/"<<m.n_serie<<"/"<<m.prix;
+  return out<<m.nom<<"/"<<m.n_serie<<"/"<<m.prix<<" euros";
   }
 //Constructeur avec json data
 Machine(json d):nom{d["nom"]},n_serie{d["n_serie"]},prix{d["prix"]} {}
@@ -435,10 +435,10 @@ std::cout<<"local :"<< l<< std::endl;
  /////////////////////////AFFICHAGE OBJET///////////////////////////////  
   //Affichage avec attributs
 const auto ob= Objet{j2["nom"], j2["prix"]};
-std::cout<<"objet :"<< ob<< std::endl;
+std::cout<<"objet :"<< ob<<" kg"<< std::endl;
   //Affichage avec int id
 const auto ob1 = Objet{2};
-std::cout << "objet: " << ob1 << std::endl; 
+std::cout << "objet: " << ob1 <<" m"<< std::endl; 
 
   
 /////////////////////////AFFICHAGE MACHINE///////////////////////////////

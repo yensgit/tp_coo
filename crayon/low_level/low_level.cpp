@@ -241,7 +241,7 @@ Etape(int id) {
 ////////classe Produit////////
 class Produit{
 std::unique_ptr<Objet> objet;
-std::unique_ptr<Etape> Etape;
+std::unique_ptr<Etape> etape;
  public:
 //Constructeur avec attributs
 Produit (int o,int e): objet{std::make_unique<Objet>(o)},etape{std::make_unique<Etape>(e)}  {}

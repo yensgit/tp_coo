@@ -444,7 +444,7 @@ const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
   std::cout << "etape 1: " << e1 << std::endl;
                                                                                                        //terminate called after throwing an instance of 'nlohmann::json_abi_v3_11_3::detail::type_error'
   //Affichage avec int id                                                                              //what():  [json.exception.type_error.302] type must be string, but is null
-  const auto e2 = Etape{2};
+  const auto e2 = Etape{2};                                                                            //Abandon
   std::cout << "etape 2: " << e2 << std::endl;
   
   /////////////////////////AFFICHAGE PRODUIT///////////////////////////////
@@ -453,9 +453,13 @@ const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
   std::cout << "produit id: " << p1 << std::endl;
   //Affichage avec attributs 
 const auto p= Produit{j9["objet"], j9["etape"]};
-  std::cout<<"produit :"<< p<< std::endl; 
+  std::cout<<"produit :"<< p<< std::endl;*/
+
+   /////////////////////////AFFICHAGE STOCK///////////////////////////////
+    //Affichage avec int id
+  const auto s1 = Stock{1};
+  std::cout << "Stock 1 : " << s1 << std::endl;
   
-*/
 
    
   return 0;

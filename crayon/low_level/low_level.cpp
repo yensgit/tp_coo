@@ -433,14 +433,14 @@ const auto qr= QuantiteRessource{j5["ressource"], j5["quantite"]};
 //Affichage avec attributs
 const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
   std::cout<<"quantite ressource :"<< qr2<< std::endl;
-/////////////////////////AFFICHAGE PRODUIT///////////////////////////////
-    //Affichage avec int id
-  const auto p1 = Produit{3};
+/*/////////////////////////AFFICHAGE PRODUIT///////////////////////////////                          //Nous avons commenté cette partie car, à partir de quantité de ressource, nous n'arrivons plus à afficher les éléments des classes
+    //Affichage avec int id                                                                          //Usine, Etape, Produit et Stock avec les const auto. On a pu les afficher autrement avec les json comme vous pourrez le voir a la compilation m
+  const auto p1 = Produit{3};                                                                        //ais pour les const auto on a l'erreur suivante que nous n'avons pas reussi a debeugger :
   std::cout << "produit id: " << p1 << std::endl;
-  //Affichage avec attributs
-const auto p= Produit{j9["objet"], j9["etape"]};
-  std::cout<<"produit :"<< p<< std::endl;
-  /////////////////////////AFFICHAGE ETAPE///////////////////////////////
+  //Affichage avec attributs                                                                          //terminate called after throwing an instance of 'nlohmann::json_abi_v3_11_3::detail::type_error'
+const auto p= Produit{j9["objet"], j9["etape"]};                                                      //what():  [json.exception.type_error.302] type must be string, but is null
+  std::cout<<"produit :"<< p<< std::endl;                                                             //Abandon
+  /////////////////////////AFFICHAGE ETAPE///////////////////////////////                             
 //Affichage avec int id
   const auto e1 = Etape{j7["nom"], j7["resource"], j7["machine"], j7["duree"], j7["etapesuiv"]};
   std::cout << "etape 1: " << e1 << std::endl;
@@ -452,10 +452,8 @@ const auto p= Produit{j9["objet"], j9["etape"]};
 /////////////////////////AFFICHAGE USINE///////////////////////////////
   //Affichage avec int id
   const auto u = Usine{1};
-  std::cout << "Usine : " << u << std::endl;
-/*//Affichage avec attributs
-    const auto u= Usine{j4["local"], j4["machines"]};
-    std::cout << "Usine : " << u << std::endl;*/
+  std::cout << "Usine : " << u << std::endl;*/
+
    
   return 0;
 }

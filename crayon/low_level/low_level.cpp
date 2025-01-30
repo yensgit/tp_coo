@@ -442,15 +442,15 @@ const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
   
    /////////////////////////AFFICHAGE ETAPE///////////////////////////////                             //Nous avons commenté cette partie car, à partir de quantité de ressource, nous n'arrivons plus à afficher les éléments des classes
     //Affichage avec int id                                                                            //Usine, Etape, Produit et Stock avec les const auto. On a pu les afficher autrement avec les requêtes HTTP avec cpr comme vous pourrez
-  const auto e1 = Etape{j7["nom"], j7["resource"], j7["machine"], j7["duree"], j7["etapesuiv"]};       //le voir à la compilation mais pour les const auto, on a l'erreur suivante en utilisant que nous n'avons pas réussi à débugger :
-  std::cout << "etape 1: " << e1 << std::endl;
+  const auto e1 = Etape{j7["nom"], j7["resource"], j7["machine"], j7["duree"], j7["etapesuiv"]};       //le voir à la compilation mais pour les const auto, on a l'erreur suivante que nous n'avons pas réussi à débugger.
+  std::cout << "etape 1: " << e1 << std::endl;                                                         //En utilisant l'affichage avec les attributs, on a :
                                                                                                        //terminate called after throwing an instance of 'nlohmann::json_abi_v3_11_3::detail::type_error'
     //Affichage avec int id                                                                            //what():  [json.exception.type_error.302] type must be string, but is null
   const auto e2 = Etape{2};                                                                            //Abandon
-  std::cout << "etape 2: " << e2 << std::endl;
-  
-  /////////////////////////AFFICHAGE PRODUIT///////////////////////////////
-    //Affichage avec attributs 
+  std::cout << "etape 2: " << e2 << std::endl;                                                         //En utilisant l'affichage avec , on a :
+                                                                                                       //terminate called after throwing an instance of 'nlohmann::json_abi_v3_11_3::detail::type_error'
+  /////////////////////////AFFICHAGE PRODUIT///////////////////////////////                            //what():  [json.exception.type_error.305] cannot use operator[] with a string argument with number
+    //Affichage avec attributs                                                                         //Abandon
 const auto p= Produit{j9["objet"], j9["etape"]};
   std::cout<<"produit :"<< p<< std::endl;
   
@@ -464,7 +464,7 @@ const auto p= Produit{j9["objet"], j9["etape"]};
   std::cout << "Stock 1 : " << s1 << std::endl;*/
 
     //Affichage avec int id
-  const auto s2 = Stock{2};
+  const auto s2 = Stock{j11};
   std::cout << "Stock  : " << s2 << std::endl;
   
   

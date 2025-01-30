@@ -262,14 +262,14 @@ auto main(int argc, char** argv)-> int{
     
     /////////////////////////QUANTITE RESSOURCE///////////////////////////////////////////// 
 
-  cpr::Response r5= cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/1/"});
+  cpr::Response r5= cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/3/"});
   r5.status_code;                  // 200
     r5.header["content-type"];       // application/json; charset=utf-8
     r5.text;  
    std::cout<< r5.text<< std::endl;
   json j5 = json::parse(r5.text);
 
-    cpr::Response r6= cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/2/"});
+    cpr::Response r6= cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/4/"});
   r6.status_code;                  // 200
     r6.header["content-type"];       // application/json; charset=utf-8
     r6.text;  

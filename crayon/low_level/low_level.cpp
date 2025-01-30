@@ -238,6 +238,7 @@ Etape(int id) {
       etapesuiv = make_unique<Etape>(j["etapesuiv"]); 
     }
 };
+
 ////////classe Produit////////
 class Produit {
 
@@ -263,7 +264,6 @@ Produit(int id) {
     }
 };
         
-
 ////////classe Stock////////
 class Stock {
 
@@ -290,10 +290,13 @@ Stock(int id) {
    nombre = j["nombre"]; 
     }
 };
+
 auto main(int argc, char** argv)-> int{
   
   std::cout<<"\n AFFICHAGE AVEC LES REQUETES HTTP EN UTILISANT CPR \n"<< std::endl;
+  
   ///////////////////////////VILLE//////////////////////////////////////////////
+  
    cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/villes/1/"});
   
     r.status_code;                  // 200
@@ -313,6 +316,7 @@ auto main(int argc, char** argv)-> int{
   json j12 = json::parse(r12.text);
   
   //////////////////////////LOCAUX//////////////////////////////////////////////
+  
   cpr::Response r1= cpr::Get(cpr::Url{"http://127.0.0.1:8000/locaux/1/"});
   r1.status_code;                  // 200
     r1.header["content-type"];       // application/json; charset=utf-8
@@ -321,6 +325,7 @@ auto main(int argc, char** argv)-> int{
   json j1 = json::parse(r1.text);
   
     //////////////////////////OBJET//////////////////////////////////////////////
+  
  cpr::Response r2 = cpr::Get(cpr::Url{"http://127.0.0.1:8000/objet/1/"});
   r2.status_code;                  // 200
     r2.header["content-type"];       // application/json; charset=utf-8
@@ -341,6 +346,23 @@ auto main(int argc, char** argv)-> int{
     r14.text;  
    std::cout<< r14.text<< std::endl;
   json j14 = json::parse(r14.text);
+  
+  /////////////////////////QUANTITE RESSOURCE///////////////////////////////////////////// 
+
+  cpr::Response r5= cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/1/"});
+  r5.status_code;                  // 200
+    r5.header["content-type"];       // application/json; charset=utf-8
+    r5.text;  
+   std::cout<< r5.text<< std::endl;
+  json j5 = json::parse(r5.text);
+
+    cpr::Response r6= cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/2/"});
+  r6.status_code;                  // 200
+    r6.header["content-type"];       // application/json; charset=utf-8
+    r6.text;  
+   std::cout<< r6.text<< std::endl;
+  json j6 = json::parse(r6.text);
+  
     /////////////////////////MACHINE///////////////////////////////////////////// 
 
   cpr::Response r3= cpr::Get(cpr::Url{"http://127.0.0.1:8000/machine/1/"});
@@ -359,21 +381,7 @@ auto main(int argc, char** argv)-> int{
    std::cout<< r4.text<< std::endl;
   json j4= json::parse(r4.text);
     
-    /////////////////////////QUANTITE RESSOURCE///////////////////////////////////////////// 
 
-  cpr::Response r5= cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/1/"});
-  r5.status_code;                  // 200
-    r5.header["content-type"];       // application/json; charset=utf-8
-    r5.text;  
-   std::cout<< r5.text<< std::endl;
-  json j5 = json::parse(r5.text);
-
-    cpr::Response r6= cpr::Get(cpr::Url{"http://127.0.0.1:8000/quantite/2/"});
-  r6.status_code;                  // 200
-    r6.header["content-type"];       // application/json; charset=utf-8
-    r6.text;  
-   std::cout<< r6.text<< std::endl;
-  json j6 = json::parse(r6.text);
 
       /////////////////////////ETAPE///////////////////////////////////////////// 
 
@@ -417,6 +425,7 @@ auto main(int argc, char** argv)-> int{
   json j11 = json::parse(r11.text);
 
   std::cout<<"\n AFFICHAGE AVEC LES CONSTRUCTEURS \n"<< std::endl;
+  
 /////////////////////////AFFICHAGE VILLE///////////////////////////////
   //Pour le constructeur avec attributs
 const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
@@ -429,10 +438,12 @@ std::cout<<"ville 1 :"<< v1<< std::endl;
   //Pour le construteur int id
 const auto v2 = Ville{2};
 std::cout << "ville 2 : " << v2 << std::endl; 
-/////////////////////////AFFICHAGE LOCAUX///////////////////////////////
+  
+/////////////////////////AFFICHAGE LOCAL///////////////////////////////
   //Affichage avec attributs
 const auto l= Local{j1["ville"], j1["nom"], j1["surface"]};
 std::cout<<"local :"<< l<< std::endl;
+  
  /////////////////////////AFFICHAGE OBJET///////////////////////////////  
   //Affichage avec attributs
 const auto ob= Objet{j2["nom"], j2["prix"]};
@@ -440,7 +451,15 @@ std::cout<<"objet :"<< ob<< std::endl;
   //Affichage avec int id
 const auto ob1 = Objet{2};
 std::cout << "objet: " << ob1 << std::endl; 
-
+  
+/////////////////////////AFFICHAGE QUANTITE RESSOURCE///////////////////////////////
+  //Affichage avec attributs
+const auto qr= QuantiteRessource{j5["ressource"], j5["quantite"]};
+  std::cout<<"quantite ressource :"<< qr<< std::endl;
+  
+  //Affichage avec attributs
+const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
+  std::cout<<"quantite ressource :"<< qr2<< std::endl;
   
 /////////////////////////AFFICHAGE MACHINE///////////////////////////////
   //Affichage avec attributs
@@ -450,21 +469,13 @@ std::cout<<"machine 1 :"<< m1<< std::endl;
   //Affichage avec int id
 const auto m2 = Machine{2};
 std::cout << "machine 2: " << m2 << std::endl; 
- 
-/////////////////////////AFFICHAGE QUANTITE RESSOURCE///////////////////////////////
-  //Affichage avec attributs
-const auto qr= QuantiteRessource{j5["ressource"], j5["quantite"]};
-  std::cout<<"quantite ressource :"<< qr<< std::endl;
   
-  //Affichage avec attributs
-const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
-  std::cout<<"quantite ressource :"<< qr2<< std::endl;
 /*/////////////////////////AFFICHAGE USINE///////////////////////////////
     //Affichage avec int id
   const auto u = Usine{1};
   std::cout << "Usine : " << u << std::endl;
   
-   /////////////////////////AFFICHAGE ETAPE///////////////////////////////                             //Nous avons commenté cette partie car, à partir de quantité de ressource, nous n'arrivons plus à afficher les éléments des classes
+   /////////////////////////AFFICHAGE ETAPE///////////////////////////////                             //Nous avons commenté cette partie car, à partir de machine, nous n'arrivons plus à afficher les éléments des classes
     //Affichage avec int id                                                                            //Usine, Etape, Produit et Stock avec les const auto. On a pu les afficher autrement avec les requêtes HTTP en faisnat usage de cpr comme
   const auto e1 = Etape{j7["nom"], j7["resource"], j7["machine"], j7["duree"], j7["etapesuiv"]};       //vous pourrez le voir à la compilation mais pour les const auto, on a l'erreur suivante que nous n'avons pas réussi à débugger.
   std::cout << "etape 1: " << e1 << std::endl;                                                         //En utilisant l'affichage avec les attributs, on a :
@@ -491,8 +502,6 @@ const auto p= Produit{j9["objet"], j9["etape"]};
   const auto s2 = Stock{2};
   std::cout << "stock 2 : " << s2 << std::endl;
   */
-  
-
-   
+     
   return 0;
 }

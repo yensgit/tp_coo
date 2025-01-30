@@ -393,6 +393,9 @@ const auto qr= QuantiteRessource{j5["ressource"], j5["quantite"]};
 const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
   std::cout<<"quantite ressource :"<< qr2<< std::endl;
 /////////////////////////AFFICHAGE PRODUIT///////////////////////////////
+    //Affichage avec int id
+  const auto p = Produit{3};
+  std::cout << "produit id: " << p << std::endl;
   //Affichage avec attributs
 const auto p= Produit{j9["objet"], j9["etape"]};
   std::cout<<"produit :"<< p<< std::endl;

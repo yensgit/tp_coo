@@ -149,7 +149,7 @@ public:
         out << *u.local << "/";
         for (const auto& machine : u.machines) {
             out << *machine << " ";
-        }
+        }0
         return out;
     }
 
@@ -239,7 +239,28 @@ Etape(int id) {
     }
 };
 ////////classe Produit////////
-
+class Produit{
+std::unique_ptr<Objet> objet;
+std::unique_ptr<Etape> Etape;
+ public:
+//Constructeur avec attributs
+Produit (int o,int e): objet{std::make_unique<Objet>(o)},etape{std::make_unique<Etape>(e)}  {}
+friend std::ostream& operator<<(
+  std::ostream& out, const Produit& p) {
+  return out<<*p.objet<<*p.etape;
+  }
+//Constructeur avec json data
+Produit(json d): objet(std::make_unique<Objet>(d["objet"]["nom"], d["objet"]["prix"])),
+          etape(std::make_unique<Etape>(d["etape"]["nom"])) {}
+//Constructeur avec int id
+Produit(int id) {
+        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/produit/" + to_string(id) + "/"});
+        json j = json::parse(r.text);
+        objet = make_unique<Objet>(j["objet"]);  
+   etape = make_unique<Etape>(j["etape"]);  
+       
+    }
+};
 ////////classe Stock////////
 
 auto main(int argc, char** argv)-> int{
@@ -320,7 +341,14 @@ auto main(int argc, char** argv)-> int{
    std::cout<< r8.text<< std::endl;
   json j8 = json::parse(r8.text);
 
-
+   /////////////////////////PRODUIT///////////////////////////////////////////// 
+  
+  cpr::Response r9= cpr::Get(cpr::Url{"http://127.0.0.1:8000/produit/3/"});
+  r9.status_code;                  // 200
+    r9.header["content-type"];       // application/json; charset=utf-8
+    r9.text;  
+   std::cout<< r9.text<< std::endl;
+  json j9= json::parse(r9.text);
 /////////////////////////AFFICHAGE VILLE///////////////////////////////
   //Pour le constructeur avec attributs
   const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
@@ -361,7 +389,10 @@ const auto qr= QuantiteRessource{j5["ressource"], j5["quantite"]};
 //Affichage avec attributs
 const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
   std::cout<<"quantite ressource :"<< qr2<< std::endl;
-
+/////////////////////////AFFICHAGE PRODUIT///////////////////////////////
+  //Affichage avec attributs
+const auto p= Produit{j9["objet"], j9["etape"]};
+  std::cout<<"produit :"<< p<< std::endl;
   /////////////////////////AFFICHAGE ETAPE///////////////////////////////
 //Affichage avec int id
   const auto e1 = Etape{j7["nom"], j7["resource"], j7["machine"], j7["duree"], j7["etapesuiv"]};

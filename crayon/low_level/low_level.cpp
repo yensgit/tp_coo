@@ -454,11 +454,11 @@ std::cout << "machine 2: " << m2 << std::endl;
 /////////////////////////AFFICHAGE QUANTITE RESSOURCE///////////////////////////////
   //Affichage avec attributs
 const auto qr= QuantiteRessource{j5["ressource"], j5["quantite"]};
-  std::cout<<"quantite ressource :"<< qr<< std::endl;
+  std::cout<<"quantite ressource :"<< qr<< " kg"<< std::endl;
   
   //Affichage avec attributs
 const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
-  std::cout<<"quantite ressource :"<< qr2<< std::endl;
+  std::cout<<"quantite ressource :"<< qr2<< " m"<< std::endl;
 /*/////////////////////////AFFICHAGE USINE///////////////////////////////
     //Affichage avec int id
   const auto u = Usine{1};

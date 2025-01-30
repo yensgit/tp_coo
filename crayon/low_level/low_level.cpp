@@ -248,7 +248,7 @@ std::unique_ptr<Etape> etape;
     // Constructeur avec attributs
     Produit(int o, int e): objet{std::make_unique<Objet>(o)}, etape{std::make_unique<Etape>(e)} {}
 friend std::ostream& operator<<(
-  std::ostream& out, const Prouduit& p) {
+  std::ostream& out, const Produit& p) {
   return out<<*p.objet<<"/"<<*p.etape;
   }
 //Constructeur avec json data
@@ -394,8 +394,8 @@ const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
   std::cout<<"quantite ressource :"<< qr2<< std::endl;
 /////////////////////////AFFICHAGE PRODUIT///////////////////////////////
     //Affichage avec int id
-  const auto p = Produit{3};
-  std::cout << "produit id: " << p << std::endl;
+  const auto p1 = Produit{3};
+  std::cout << "produit id: " << p1 << std::endl;
   //Affichage avec attributs
 const auto p= Produit{j9["objet"], j9["etape"]};
   std::cout<<"produit :"<< p<< std::endl;

@@ -364,7 +364,7 @@ const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
 
   /////////////////////////AFFICHAGE ETAPE///////////////////////////////
 //Affichage avec int id
-  const auto e1 = Etape{1};
+  const auto e1 = Etape{j7["nom"], j7["resource"], j7["machine"], j7["duree"], j7["etapesuiv"]};
   std::cout << "etape 1: " << e1 << std::endl;
   
   //Affichage avec int id

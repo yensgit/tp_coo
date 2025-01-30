@@ -457,7 +457,7 @@ const auto p= Produit{j9["objet"], j9["etape"]};
 
    /////////////////////////AFFICHAGE STOCK///////////////////////////////
     //Affichage avec int id
-  const auto s1 = Stock{j10["ressource"], j10["nombre"]; j11["usine"]};
+  const auto s1 = Stock{j10["ressource"], j10["nombre"], j11["usine"]};
   std::cout << "Stock 1 : " << s1 << std::endl;
   
 

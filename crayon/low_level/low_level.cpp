@@ -252,8 +252,8 @@ friend std::ostream& operator<<(
   return out<<*p.objet<<"/"<<*p.etape;
   }
 //Constructeur avec json data
-Produit(json d): objet(std::make_unique<Objet>(d["objet"]["nom"], d["objet"]["prix"])),
-          etape(std::make_unique<Etape>(d["etape"]["nom"])) {}
+Produit(json d): objet(std::make_unique<Objet>(d["objet"])),
+          etape(std::make_unique<Etape>(d["etape"])) {}
 //Constructeur avec int id
 Produit(int id) {
         cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/produit/" + to_string(id) + "/"});

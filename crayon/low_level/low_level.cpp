@@ -447,7 +447,7 @@ const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
                                                                                                        //terminate called after throwing an instance of 'nlohmann::json_abi_v3_11_3::detail::type_error'
     //Affichage avec int id                                                                            //what():  [json.exception.type_error.302] type must be string, but is null
   const auto e2 = Etape{2};                                                                            //Abandon
-  std::cout << "etape 2: " << e2 << std::endl;                                                         //En utilisant l'affichage avec , on a :
+  std::cout << "etape 2: " << e2 << std::endl;                                                         //En utilisant l'affichage avec json data ou int id, on a :
                                                                                                        //terminate called after throwing an instance of 'nlohmann::json_abi_v3_11_3::detail::type_error'
   /////////////////////////AFFICHAGE PRODUIT///////////////////////////////                            //what():  [json.exception.type_error.305] cannot use operator[] with a string argument with number
     //Affichage avec attributs                                                                         //Abandon
@@ -461,12 +461,12 @@ const auto p= Produit{j9["objet"], j9["etape"]};
    /////////////////////////AFFICHAGE STOCK///////////////////////////////
     //Affichage avec int id
   const auto s1 = Stock{1};
-  std::cout << "Stock 1 : " << s1 << std::endl;*/
+  std::cout << "stock 1 : " << s1 << std::endl;
 
     //Affichage avec int id
-  const auto s2 = Stock{j11};
-  std::cout << "Stock  : " << s2 << std::endl;
-  
+  const auto s2 = Stock{2};
+  std::cout << "stock 2 : " << s2 << std::endl;
+  */
   
 
    

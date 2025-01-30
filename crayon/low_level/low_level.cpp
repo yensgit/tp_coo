@@ -211,9 +211,9 @@ Usine(json d) : Local(d["ville"]), machines{}{
 class Etape{
 int nom;
 std::unique_ptr<QuantiteRessource> quantite;
-std::unique_ptr<Machine> Machine;
+std::unique_ptr<Machine> machine;
 int duree;
-std::unique_ptr<Etape> EtapeSuiv;
+std::unique_ptr<Etape> etapesuiv;
 
 public:
 //Constructeur avec attributs
@@ -228,7 +228,7 @@ machine(std::make_unique<Machine>(d["machine"]["nom"], d["machine"]["n_serie"], 
           duree{d["duree"]},
 etapesuiv(std::make_unique<Etape>(d["etapesuiv"]["nom"])) {}
 //Constructeur avec int id
-QuantiteRessource(int id) {
+Etape(int id) {
         cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/etape/" + to_string(id) + "/"});
         json j = json::parse(r.text);
       nom = j["nom"];

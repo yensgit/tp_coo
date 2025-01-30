@@ -383,10 +383,15 @@ auto main(int argc, char** argv)-> int{
     r10.text;  
    std::cout<< r10.text<< std::endl;
   json j10 = json::parse(r10.text);
+  
+ cpr::Response r11= cpr::Get(cpr::Url{"http://127.0.0.1:8000/stock/1/"});
+  r11.status_code;                  // 200
+    r11.header["content-type"];       // application/json; charset=utf-8
+    r11.text;  
+   std::cout<< r11.text<< std::endl;
+  json j11 = json::parse(r11.text);
 
-  //Pour le constructeur json data
-  const auto s= Stock{j10};
-   std::cout<<"stock :"<< s<< std::endl;
+ 
   
 /////////////////////////AFFICHAGE VILLE///////////////////////////////
   //Pour le constructeur avec attributs

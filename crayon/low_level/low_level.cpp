@@ -239,30 +239,34 @@ Etape(int id) {
     }
 };
 ////////classe Produit////////
-class Produit : public Objet{
-//std::unique_ptr<Objet> objet;
-
+class Produit : public Objet {
  public:
-std::unique_ptr<Etape> etape;
-string nom;
-//Constructeur avec attributs
-Produit (string nom,int e): nom{nom},etape{std::make_unique<Etape>(e)}  {}
-friend std::ostream& operator<<(
-  std::ostream& out, const Produit& p) {
-  return out<<p.nom<<*p.etape;
-  }
-//Constructeur avec json data
-Produit(json d): nom{d["nom"]},
-          etape(std::make_unique<Etape>(d["etape"]["nom"])) {}
-//Constructeur avec int id
-Produit(int id) {
-        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/produit/" + to_string(id) + "/"});
+    std::unique_ptr<Etape> etape;
+    std::string nom;
+
+    // Constructeur avec attributs
+    Produit(std::string nom, int e)
+        : Objet(nom, e), nom{nom}, etape{std::make_unique<Etape>(e)} {}
+
+    // Surcharge de l'opérateur <<
+    friend std::ostream& operator<<(std::ostream& out, const Produit& p) {
+        return out << p.nom << *p.etape;
+    }
+
+    // Constructeur avec JSON
+    Produit(json d)
+        : Objet(d), nom{d["nom"]}, etape(std::make_unique<Etape>(d["etape"]["nom"])) {}
+
+    // Constructeur avec ID
+    Produit(int id)
+        : Objet(id) {  // Appelle explicitement le constructeur de Objet(int)
+        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/produit/" + std::to_string(id) + "/"});
         json j = json::parse(r.text);
-       nom=j["nom"];  
-    etape = make_unique<Etape>(j["etape"]);  
-       
+        nom = j["nom"];
+        etape = std::make_unique<Etape>(j["etape"]);
     }
 };
+
 ////////classe Stock////////
 
 auto main(int argc, char** argv)-> int{

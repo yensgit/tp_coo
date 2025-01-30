@@ -149,7 +149,7 @@ public:
         out << *u.local << "/";
         for (const auto& machine : u.machines) {
             out << *machine << " ";
-        }0
+        }
         return out;
     }
 

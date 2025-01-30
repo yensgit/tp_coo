@@ -304,6 +304,23 @@ auto main(int argc, char** argv)-> int{
    std::cout<< r6.text<< std::endl;
   json j6 = json::parse(r6.text);
 
+      /////////////////////////ETAPE///////////////////////////////////////////// 
+
+  cpr::Response r7= cpr::Get(cpr::Url{"http://127.0.0.1:8000/etape/1/"});
+  r7.status_code;                  // 200
+    r7.header["content-type"];       // application/json; charset=utf-8
+    r7.text;  
+   std::cout<< r7.text<< std::endl;
+  json j7 = json::parse(r7.text);
+
+    cpr::Response r8= cpr::Get(cpr::Url{"http://127.0.0.1:8000/etape/2/"});
+  r8.status_code;                  // 200
+    r8.header["content-type"];       // application/json; charset=utf-8
+    r8.text;  
+   std::cout<< r8.text<< std::endl;
+  json j8 = json::parse(r8.text);
+
+
 /////////////////////////AFFICHAGE VILLE///////////////////////////////
   //Pour le constructeur avec attributs
   const auto v= Ville{j["nom"], j["code postal"], j["prix m2"]};
@@ -344,11 +361,23 @@ const auto qr= QuantiteRessource{j5["ressource"], j5["quantite"]};
 //Affichage avec attributs
 const auto qr2= QuantiteRessource{j6["ressource"], j6["quantite"]};
   std::cout<<"quantite ressource :"<< qr2<< std::endl;
+
+  /////////////////////////AFFICHAGE ETAPE///////////////////////////////
+//Affichage avec int id
+  const auto e1 = Etape{1};
+  std::cout << "etape 1: " << e1 << std::endl;
+  
+  //Affichage avec int id
+  const auto e2 = Etape{2};
+  std::cout << "etape 2: " << e2 << std::endl;
   
 /////////////////////////AFFICHAGE USINE///////////////////////////////
-//Affichage avec attributs
+  //Affichage avec int id
+  const auto u = Usine{1};
+  std::cout << "Usine : " << u << std::endl;
+/*//Affichage avec attributs
     const auto u= Usine{j4["local"], j4["machines"]};
-    std::cout << "Usine : " << u << std::endl;
+    std::cout << "Usine : " << u << std::endl;*/
    
   return 0;
 }

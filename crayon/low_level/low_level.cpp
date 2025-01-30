@@ -208,7 +208,36 @@ Usine(json d) : Local(d["ville"]), machines{}{
 };*/
 
 ////////classe Etape////////
+class Etape{
+int nom;
+std::unique_ptr<QuantiteRessource> quantite;
+std::unique_ptr<Machine> Machine;
+int duree;
+std::unique_ptr<Etape> EtapeSuiv;
 
+public:
+//Constructeur avec attributs
+Etape (int n, int qr, int m, int d, int es): nom{n}, quantite{std::make_unique<QuantiteRessource>(qr)}, machine{std::make_unique<Machine>(m)}, duree{d}, etapesuiv{std::make_unique<Etape>(es)} {}
+friend std::ostream& operator<<(
+  std::ostream& out, const Etape& e) {
+  return out<<e.nom<<"/"<<*e.quantite<<"/"<<*e.machine<<"/"<<e.duree<<"/"<<*e.etapesuiv;
+  }
+//Constructeur avec json data
+Etape(json d): nom{d["nom"]}, quantite(std::make_unique<QuantiteRessource>(d["quantite"]["ressource"], d["quantite"]["quantite"])),
+machine(std::make_unique<Machine>(d["machine"]["nom"], d["machine"]["n_serie"], d["machine"]["prix"])),
+          duree{d["duree"]},
+etapesuiv(std::make_unique<Etape>(d["etapesuiv"]["nom"])) {}
+//Constructeur avec int id
+QuantiteRessource(int id) {
+        cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/etape/" + to_string(id) + "/"});
+        json j = json::parse(r.text);
+      nom = j["nom"];
+      quantite = make_unique<QuantiteRessource>(j["quantite"]);
+      machine = make_unique<Machine>(j["machine"]); 
+      duree = j["duree"];
+      etapesuiv = make_unique<Etape>(j["etapesuiv"]); 
+    }
+};
 ////////classe Produit////////
 
 ////////classe Stock////////

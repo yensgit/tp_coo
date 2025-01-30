@@ -239,25 +239,27 @@ Etape(int id) {
     }
 };
 ////////classe Produit////////
-class Produit{
-std::unique_ptr<Objet> objet;
-std::unique_ptr<Etape> etape;
+class Produit : public Objet{
+//std::unique_ptr<Objet> objet;
+
  public:
+std::unique_ptr<Etape> etape;
+string nom;
 //Constructeur avec attributs
-Produit (int o,int e): objet{std::make_unique<Objet>(o)},etape{std::make_unique<Etape>(e)}  {}
+Produit (string nom,int e): nom(nom),etape{std::make_unique<Etape>(e)}  {}
 friend std::ostream& operator<<(
   std::ostream& out, const Produit& p) {
-  return out<<*p.objet<<*p.etape;
+  return out<<p.nom<<*p.etape;
   }
 //Constructeur avec json data
-Produit(json d): objet(std::make_unique<Objet>(d["objet"]["nom"], d["objet"]["prix"])),
+Produit(json d): nom{d["nom"]},
           etape(std::make_unique<Etape>(d["etape"]["nom"])) {}
 //Constructeur avec int id
 Produit(int id) {
         cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/produit/" + to_string(id) + "/"});
         json j = json::parse(r.text);
-        objet = make_unique<Objet>(j["objet"]);  
-   etape = make_unique<Etape>(j["etape"]);  
+       nom=j["nom"];  
+    etape = make_unique<Etape>(j["etape"]);  
        
     }
 };

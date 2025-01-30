@@ -273,16 +273,16 @@ int nombre;
 
  public:
     // Constructeur avec attributs
-    Produit(int u, int r,int n): usine{std::make_unique<Usine>(u)}, ressource{std::make_unique<Ressource>(r)},nombre{n} {}
+    Stock(int u, int r,int n): usine{std::make_unique<Usine>(u)}, ressource{std::make_unique<Ressource>(r)},nombre{n} {}
 friend std::ostream& operator<<(
   std::ostream& out, const Stock& s) {
   return out<<*s.usine<<"/"<<*s.ressource<<"/"<<s.nombre;
   }
 //Constructeur avec json data
-Produit(json d): usine(std::make_unique<Usine>(d["usine"])),
+Stock(json d): usine(std::make_unique<Usine>(d["usine"])),
           ressource(std::make_unique<Ressource>(d["ressource"])) {}
 //Constructeur avec int id
-Produit(int id) {
+Stock(int id) {
         cpr::Response r = cpr::Get(cpr::Url{"http://127.0.0.1:8000/stock/" + to_string(id) + "/"});
         json j = json::parse(r.text);
         usine = make_unique<Usine>(j["usine"]);  

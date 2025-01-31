@@ -4,9 +4,16 @@ Ce fichier est un projet scoaire qui avait pour but la conception d'une usine de
 création du projet a travers la configuration d’un dépôt distant qui nous apermis de faire la publication du projet;nous avons egalment cree une application grace a django afin de pouvoir
 specifier les differentes isntances de notre projet ( usine , l ville , les machines etc...).
 
-# voici  les Pre requis pour effectuer l'installation 
+# voici  les Pre requis pour effectuer l'installation
+Il vous faudra installer les outils suivants :
 
-Cloner le projet
+    Git : git --version
+    Python : python -V
+    Pip : python -m pip -V
+    Virtualenv : python -m venv
+    CMake (pour la partie C++) : pip install cmake
+
+Ensuite il vous faudra Cloner le projet
 
     git clone  https://github.com/yensgit/tp_coo
     cd crayon
@@ -53,9 +60,12 @@ Configurer et compiler
 # Donnees de tests et resultat finaux 
 ## Donnees de tests :
 - une Usine de 50 m²
-- dans la Ville Labège à 2 000 €/m²
+- dans la Ville Labège à 2 000 €/m² 
 - avec une Machine à 1 000 €, et une autre à 2 000 €
  en stock
 - 1000 kg de bois à 10 €/kg
 - 50 m de mine à 15 €/m
-// Les ressources sont donc : le bois et la mine .
+
+Les ressources sont donc : le bois et la mine .
+##resultats obtenus 
+###

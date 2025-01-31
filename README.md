@@ -3,7 +3,7 @@
 Ce fichier est un projet universitaire qui avait pour but la conception d'une usine de fabrication de crayon.
 Pour se faire nous avons pris en main l'outil GIT pour la création du projet à travers la configuration d’un dépôt distant 
 qui nous a permis de faire la publication du projet. Nous avons également crée une application grace à django afin de pouvoir
-spécifier les différentes instances de notre projet ( usine, villes, les machines etc...).
+spécifier les différentes instances de notre projet (usine, villes, les machines etc...).
 
 # Pré-requis pour effectuer l'installation :
 Il vous faudra installer les outils suivants :

@@ -1,10 +1,11 @@
 # Introduction 
 
-Ce fichier est un projet scoaire qui avait pour but la conception d'une usine de fabriction e crayon .pour se faire nous avons pris en main l'outil GIT pour la 
-création du projet a travers la configuration d’un dépôt distant qui nous apermis de faire la publication du projet;nous avons egalment cree une application grace a django afin de pouvoir
-specifier les differentes isntances de notre projet ( usine , l ville , les machines etc...).
+Ce fichier est un projet universitaire qui avait pour but la conception d'une usine de fabrication de crayon.
+Pour se faire nous avons pris en main l'outil GIT pour la création du projet à travers la configuration d’un dépôt distant 
+qui nous a permis de faire la publication du projet. Nous avons également crée une application grace à django afin de pouvoir
+spécifier les différentes instances de notre projet ( usine , villes , les machines etc...).
 
-# voici  les Pre requis pour effectuer l'installation
+# voici  les Pre requis pour effectuer l'installation :
 Il vous faudra installer les outils suivants :
 
     Git : git --version
@@ -89,7 +90,7 @@ Pour acceder aux autres modele il vous faudra aller sur ce lien
 
     http://127.0.0.1:8000/
     
-en rajoutant a sa suite :
+en rajoutant à sa suite :
 
     villes/id/ 
     locaux/id/

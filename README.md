@@ -5,7 +5,7 @@ Pour se faire nous avons pris en main l'outil GIT pour la création du projet à
 qui nous a permis de faire la publication du projet. Nous avons également crée une application grace à django afin de pouvoir
 spécifier les différentes instances de notre projet ( usine, villes, les machines etc...).
 
-# voici  les Pre requis pour effectuer l'installation :
+# Pré-requis pour effectuer l'installation :
 Il vous faudra installer les outils suivants :
 
     Git : git --version

@@ -58,4 +58,4 @@ Configurer et compiler
  en stock
 - 1000 kg de bois à 10 €/kg
 - 50 m de mine à 15 €/m
-Les ressources sont donc : le bois et la mine .
+// Les ressources sont donc : le bois et la mine .

@@ -70,7 +70,27 @@ Les ressources sont donc : le bois et la mine .
 
 ## Resultats obtenus 
 ### Partie Django
-
+Pour l'usine
+![image](https://github.com/user-attachments/assets/d14bed04-08a4-4084-a12a-091afb2a4ebc)
+Pour une de nos villes (car nous en avons cree 2)
+![image](https://github.com/user-attachments/assets/b3237fb2-3e78-473e-b98d-1dcb1b4ed7b8)
+Pour l'une de nos  ressources
+![image](https://github.com/user-attachments/assets/957dad43-9ef9-44a3-b331-aa3c5664bcae)
+#### Liste de nos autres elements :
+Pour acceder aux autres modele il vous faudra aller sur ce lien 
+    http://127.0.0.1:8000/
+en rajoutant a sa suite :
+    villes/id/ 
+    locaux/id/
+    objet/id/ 
+    quantite/id/ 
+    machine/id/ 
+    usine/id/ 
+    etape/id/ 
+    produit/id/ 
+    stock/id/ 
+    api/id/ 
+    
 ### Partie C++
 ![image](https://github.com/user-attachments/assets/136eb7f9-7813-416d-a50a-73c9524fea74)
 

@@ -67,5 +67,8 @@ Configurer et compiler
 - 50 m de mine à 15 €/m
 
 Les ressources sont donc : le bois et la mine .
-##resultats obtenus 
-###
+
+## Resultats obtenus 
+### Partie C++
+![image](https://github.com/user-attachments/assets/136eb7f9-7813-416d-a50a-73c9524fea74)
+

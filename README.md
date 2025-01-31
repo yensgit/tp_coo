@@ -4,32 +4,32 @@ specifier les differentes isntances de notre projet ( usine , l ville , les mach
 
 # voici  les Pre requis pour effectuer l'installation 
 
-Cloner le projet
+#Cloner le projet
 
-git clone  https://github.com/yensgit/tp_coo
-cd crayon
+    git clone  https://github.com/yensgit/tp_coo
+    cd crayon
 
 ## Configurer l’environnement Python
 
-python -m venv .venv
-source .venv/bin/activate  # Sur Windows : .venv\Scripts\activate
-pip install -U pip
-pip install django
-django-admin startproject crayon
+    python -m venv .venv
+    source .venv/bin/activate  # Sur Windows : .venv\Scripts\activate
+    pip install -U pip
+    pip install django
+    django-admin startproject crayon
 
 # Créer l’application
 
-cd crayon
-./manage.py startapp production
+    cd crayon
+    ./manage.py startapp production
 
 Appliquer les migrations
 
-./manage.py makemigrations
-./manage.py migrate
+    ./manage.py makemigrations
+    ./manage.py migrate
 
 Créer un super-utilisateur
 
-./manage.py createsuperuser
+    ./manage.py createsuperuser
 
 Lancer le serveur
 
@@ -41,12 +41,12 @@ Lancer le serveur
 
 #Configurer et compiler
 
-mkdir low_level
-cd low_level
-wget https://gitlab.laas.fr/gsaurel/teach/-/raw/main/src/CMakeLists.txt
-cmake -B build -S .
-cmake --build build
+    mkdir low_level
+    cd low_level
+    wget https://gitlab.laas.fr/gsaurel/teach/-/raw/main/src/CMakeLists.txt
+    cmake -B build -S .
+    cmake --build build
 
 # Exécuter le programme
 
-./build/low_level
+    ./build/low_level

@@ -4,7 +4,7 @@ specifier les differentes isntances de notre projet ( usine , l ville , les mach
 
 # voici  les Pre requis pour effectuer l'installation 
 
-#Cloner le projet
+Cloner le projet
 
     git clone  https://github.com/yensgit/tp_coo
     cd crayon
@@ -17,13 +17,10 @@ specifier les differentes isntances de notre projet ( usine , l ville , les mach
     pip install django
     django-admin startproject crayon
 
-# Créer l’application
-
-    cd crayon
-    ./manage.py startapp production
+# Acces à l’application
 
 Appliquer les migrations
-
+    cd crayon
     ./manage.py makemigrations
     ./manage.py migrate
 
@@ -39,7 +36,7 @@ Lancer le serveur
 
 ## Compilation du projet C++
 
-#Configurer et compiler
+Configurer et compiler
 
     mkdir low_level
     cd low_level

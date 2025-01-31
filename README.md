@@ -2,8 +2,8 @@
 
 Ce fichier est un projet universitaire qui avait pour but la conception d'une usine de fabrication de crayon.
 Pour se faire nous avons pris en main l'outil GIT pour la création du projet à travers la configuration d’un dépôt distant 
-qui nous a permis de faire la publication du projet. Nous avons également crée une application grace à django afin de pouvoir
-spécifier les différentes instances de notre projet (usine, villes, les machines etc...).
+qui nous a permis de faire la publication du projet. Nous avons également crée une application grâce à Django afin de pouvoir
+spécifier les différentes instances de notre projet (usine, villes, machines etc...).
 
 # Pré-requis pour effectuer l'installation :
 Il vous faudra installer les outils suivants :
@@ -25,7 +25,6 @@ Ensuite il vous faudra cloner le projet :
     source .venv/bin/activate  # Sur Windows : .venv\Scripts\activate
     pip install -U pip
     pip install django
-    django-admin startproject crayon
 
 # Accès à l’application
 
@@ -43,7 +42,9 @@ Lancer le serveur
 
     ./manage.py runserver
 
-    Accédez à l’administration via http://localhost:8000/admin.
+Accédez à l’administration via
+
+    http://localhost:8000/admin
 
 # Données de tests et résultats finaux 
 ## Données de tests :
@@ -104,4 +105,4 @@ Configurer et compiler
 
 ![image](https://github.com/user-attachments/assets/136eb7f9-7813-416d-a50a-73c9524fea74)
 
-#### Autrices : Zoe VILLEMUR  & Mariam M L YENA 
+#### Autrices : Zoé VILLEMUR  & Mariam M L YENA 

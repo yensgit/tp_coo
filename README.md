@@ -45,16 +45,6 @@ Lancer le serveur
 
     Accédez à l’administration via http://localhost:8000/admin.
 
-## Compilation du projet C++
-
-Configurer et compiler
-
-    mkdir low_level
-    cd low_level
-    wget https://gitlab.laas.fr/gsaurel/teach/-/raw/main/src/CMakeLists.txt
-    cmake -B build -S .
-    cmake --build build
-
 # Exécuter le programme
 
     ./build/low_level
@@ -104,6 +94,16 @@ en rajoutant à sa suite :
     api/id/ 
     
 ### Partie C++
+
+## Compilation du projet C++
+
+Configurer et compiler
+
+    cd crayon/low_level
+    cmake -B build -S .
+    cmake --build build
+    ./build/low_level
+
 
 ![image](https://github.com/user-attachments/assets/136eb7f9-7813-416d-a50a-73c9524fea74)
 

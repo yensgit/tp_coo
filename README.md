@@ -69,6 +69,8 @@ Configurer et compiler
 Les ressources sont donc : le bois et la mine .
 
 ## Resultats obtenus 
+### Partie Django
+
 ### Partie C++
 ![image](https://github.com/user-attachments/assets/136eb7f9-7813-416d-a50a-73c9524fea74)
 

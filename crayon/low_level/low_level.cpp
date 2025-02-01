@@ -406,7 +406,7 @@ auto main(int argc, char** argv)-> int{
 
    /////////////////////////PRODUIT///////////////////////////////////////////// 
   
-  cpr::Response r9= cpr::Get(cpr::Url{"http://127.0.0.1:8000/produit/3/"});
+  cpr::Response r9= cpr::Get(cpr::Url{"http://127.0.0.1:8000/produit/6/"});
   r9.status_code;                  // 200
     r9.header["content-type"];       // application/json; charset=utf-8
     r9.text;  
